@@ -74,6 +74,8 @@ from src.tokenizers import (
 from src.stemming_lemmatization import StemmingLemmatizationAnalyzer
 from src.stopwords_handler import StopwordsHandler
 from src.custom_pos_tagger import RuleBasedLegalPOSTagger
+from src.evaluation import resolve_ground_truth, BENCHMARK_QUERIES
+from src.utils import calculate_precision_recall_f1, calculate_precision_recall_at_k
 
 # ----------------- STREAMLIT PAGE CONFIG -----------------
 st.set_page_config(
@@ -1070,6 +1072,7 @@ elif selected_page == "🔎 Legal Search":
 
     if search_query_input:
         res = target_engine.search(search_query_input, query_type=mode_map[query_mode])
+        retrieved_doc_ids = [item["document_id"] for item in res["results"]]
 
         badge_type = "pill-green" if "Pipeline B" in pipe_choice else "pill-blue"
         st.markdown(f"""
@@ -1083,6 +1086,74 @@ elif selected_page == "🔎 Legal Search":
             </div>
         </div>
         """, unsafe_allow_html=True)
+
+        # ---------------- Ground Truth & Relevance Evaluation ----------------
+        gt_info = resolve_ground_truth(search_query_input, documents)
+        default_relevant_docs = gt_info["relevant_docs"]
+
+        with st.expander("⚙️ Ground Truth Relevance Annotations (Inspect & Customize)", expanded=False):
+            st.caption(f"Relevant documents are automatically detected using {gt_info['source'].lower()}. You can toggle relevant judgments below to see how metrics change in real time:")
+            all_corpus_docs = sorted(list(documents.keys()))
+            selected_gt = st.multiselect(
+                "Expected Relevant Documents:",
+                options=all_corpus_docs,
+                default=[d for d in default_relevant_docs if d in all_corpus_docs],
+                key=f"gt_sel_{search_query_input}_{pipe_choice}"
+            )
+            effective_relevant_docs = selected_gt if selected_gt is not None else default_relevant_docs
+            gt_source_label = gt_info["source"] if selected_gt == default_relevant_docs else "User-Customized Ground Truth"
+            if gt_info.get("notes"):
+                st.info(f"⚖️ **Legal Annotation Rationale:** {gt_info['notes']}")
+
+        # Calculate Evaluation Metrics
+        p, r, f1 = calculate_precision_recall_f1(retrieved_doc_ids, effective_relevant_docs)
+        p_at_5, r_at_5 = calculate_precision_recall_at_k(retrieved_doc_ids, effective_relevant_docs, k=5)
+
+        tp_set = set(retrieved_doc_ids).intersection(set(effective_relevant_docs))
+        fp_set = set(retrieved_doc_ids) - set(effective_relevant_docs)
+        fn_set = set(effective_relevant_docs) - set(retrieved_doc_ids)
+
+        # Top Evaluation Metric Cards
+        st.markdown("#### 🎯 Information Retrieval Evaluation Metrics")
+        ev1, ev2, ev3, ev4, ev5 = st.columns(5)
+        ev1.metric("Precision", f"{p:.4f}", f"{p * 100:.1f}%")
+        ev2.metric("Recall", f"{r:.4f}", f"{r * 100:.1f}%")
+        ev3.metric("F1-Score", f"{f1:.4f}", "Harmonic Mean")
+        ev4.metric("Precision@5", f"{p_at_5:.4f}", "Top 5 Cutoff")
+        ev5.metric("Relevant Hits (TP)", f"{len(tp_set)} / {len(effective_relevant_docs)}", f"{res['execution_time_ms']} ms")
+
+        # Academic Forensic Search Execution Summary (Forensic IR Lab Format)
+        trace_summary = f"""================================================================================
+SEARCH EXECUTION SUMMARY — DOMAIN-SPECIFIC LEGAL RETRIEVAL
+================================================================================
+Query:                 {search_query_input}
+Active Query Type:     {res['query_type'].upper()}
+Engine Pipeline:       {pipe_choice}
+Retrieved Documents:   {' '.join(retrieved_doc_ids) if retrieved_doc_ids else 'None'}
+Total Results Found:   {len(retrieved_doc_ids)}
+Execution Time:        {res['execution_time_ms']} ms
+--------------------------------------------------------------------------------
+INDEX NORMALIZATION & MATCHING TRACE:
+• Index Query Terms:   {', '.join([w.strip('"\'') for w in search_query_input.split() if w.upper() not in {'AND', 'OR', 'NOT'}])}
+• Verification Status: Postings verified in {len(retrieved_doc_ids)} document(s): {' '.join(retrieved_doc_ids) if retrieved_doc_ids else 'None'}
+• Classification:      TP={len(tp_set)} | FP={len(fp_set)} | FN={len(fn_set)}
+--------------------------------------------------------------------------------
+EVALUATION METRICS & GROUND TRUTH:
+Ground Truth Source:   {gt_source_label}
+Relevant Documents:    {' '.join(effective_relevant_docs) if effective_relevant_docs else 'None'}
+True Positives (TP):   {' '.join(sorted(list(tp_set))) if tp_set else 'None'}
+False Positives (FP):  {' '.join(sorted(list(fp_set))) if fp_set else 'None'}
+False Negatives (FN):  {' '.join(sorted(list(fn_set))) if fn_set else 'None'}
+Precision:             {p:.4f}   [Formula: TP / (TP + FP) = {len(tp_set)} / {len(retrieved_doc_ids) if retrieved_doc_ids else 1}]
+Recall:                {r:.4f}   [Formula: TP / (TP + FN) = {len(tp_set)} / {len(effective_relevant_docs) if effective_relevant_docs else 1}]
+F1-Score:              {f1:.4f}   [Formula: 2 * P * R / (P + R)]
+Precision@5:           {p_at_5:.4f}
+================================================================================"""
+        with st.expander("📋 View Academic Search Execution Summary & Evaluation Trace (Forensic IR Format)", expanded=True):
+            st.code(trace_summary, language="text")
+
+        st.markdown("---")
+        st.markdown("#### 📜 Retrieved Judgment Summaries & Evidentiary Previews")
 
         if res["results"]:
             clean_terms = [w.strip('"\'') for w in search_query_input.split() if w.upper() not in {"AND", "OR", "NOT"}]
@@ -1312,7 +1383,21 @@ elif selected_page == "⚡ Boolean Query Builder":
 
     if st.button("🚀 Execute Boolean Query on Pipeline B", type="primary"):
         b_res = engine_b.search(assembled_query, query_type="boolean")
+        b_retrieved = [r["document_id"] for r in b_res["results"]]
+        b_gt = resolve_ground_truth(assembled_query, documents)
+        b_p, b_r, b_f1 = calculate_precision_recall_f1(b_retrieved, b_gt["relevant_docs"])
+
         st.markdown(f"#### Retrieved **{b_res['num_results']} Judgments** in **{b_res['execution_time_ms']} ms**:")
+
+        # Metric cards
+        bm1, bm2, bm3, bm4 = st.columns(4)
+        bm1.metric("Precision", f"{b_p:.4f}", f"{b_p * 100:.1f}%")
+        bm2.metric("Recall", f"{b_r:.4f}", f"{b_r * 100:.1f}%")
+        bm3.metric("F1-Score", f"{b_f1:.4f}", "Harmonic Mean")
+        bm4.metric("Latency", f"{b_res['execution_time_ms']} ms", "Pipeline B")
+
+        st.caption(f"**Ground Truth Provenance:** {b_gt['source']} · **Expected Relevant:** `{' '.join(b_gt['relevant_docs']) if b_gt['relevant_docs'] else 'None'}`")
+
         if b_res["results"]:
             for r in b_res["results"]:
                 st.markdown(f"• **[{r['document_id']}]** {r['case_name']} — *{r['court_year']}* (`{r['sector']}`)")

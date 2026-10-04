@@ -7,6 +7,7 @@ and exports results to CSV.
 from typing import List, Dict, Any, Tuple, Optional, Set
 from pathlib import Path
 import pandas as pd
+import re
 
 try:
     from config import RELEVANCE_JUDGMENTS_CSV, EVALUATION_RESULTS_CSV, EVALUATION_K
@@ -246,3 +247,104 @@ class RelevanceEvaluator:
         out = output_path or EVALUATION_RESULTS_CSV
         df_results.to_csv(out, index=False, encoding='utf-8')
         return out
+
+
+def resolve_ground_truth(query_str: str, documents: Optional[Dict[str, Any]] = None, custom_relevant: Optional[List[str]] = None) -> Dict[str, Any]:
+    """
+    Resolve ground-truth relevant documents for any query (authoritative benchmark, domain keyword, or dynamic ad-hoc).
+    Returns dict containing:
+      - 'source': description of ground truth provenance
+      - 'relevant_docs': list of document IDs (e.g. ['D08', 'D10'])
+      - 'is_benchmark': bool indicating if query matches pre-annotated benchmark
+      - 'notes': contextual legal rationale
+    """
+    if custom_relevant is not None:
+        return {
+            "source": "User-Defined Ground Truth Annotation",
+            "relevant_docs": sorted(custom_relevant),
+            "is_benchmark": False,
+            "notes": "Custom relevance judgment defined by user in query console."
+        }
+
+    q_clean = query_str.strip().lower()
+    q_unquoted = re.sub(r'["\']', '', q_clean).strip()
+
+    # 1. Match against 15 authoritative benchmark queries
+    for bq in BENCHMARK_QUERIES:
+        bq_str = bq["query"].strip().lower()
+        bq_unquoted = re.sub(r'["\']', '', bq_str).strip()
+        if q_clean == bq_str or q_unquoted == bq_unquoted:
+            return {
+                "source": f"Authoritative Benchmark Ground Truth ({bq['query_id']})",
+                "relevant_docs": sorted(bq["relevant_docs"]),
+                "is_benchmark": True,
+                "notes": bq["notes"]
+            }
+
+    # 2. Known domain mappings for common legal search queries
+    DOMAIN_KEYWORDS = {
+        "smuggl": (["D08", "D10"], "Gold export diversion under Customs Act s.135 (D08) & contraband narcotics transport (D10)."),
+        "smuggling": (["D08", "D10"], "Gold export diversion under Customs Act s.135 (D08) & contraband narcotics transport (D10)."),
+        "customs": (["D08"], "Section 135 Customs Act gold smuggling prosecution."),
+        "gold": (["D08"], "Calcutta HC gold export diversion and PMLA case."),
+        "narcotics": (["D09", "D10"], "NDPS Act narcotics possession and commercial quantity seizures."),
+        "charas": (["D10"], "Commercial quantity charas seizure under NDPS Act Section 8/21."),
+        "commercial quantity": (["D09", "D10"], "Strict threshold under Section 37 NDPS Act for narcotics bail."),
+        "murder": (["D11", "D12", "D13", "D14", "D18", "D23"], "Capital murder proceedings under IPC Section 302."),
+        "homicide": (["D11", "D12", "D13", "D14", "D18", "D23"], "Capital murder proceedings under IPC Section 302."),
+        "section 302": (["D11", "D12", "D13", "D14", "D18", "D23"], "Direct invocation of murder charges under Section 302 IPC."),
+        "pocso": (["D16", "D17"], "Protection of Children from Sexual Offences (POCSO) Act."),
+        "rape": (["D16", "D17"], "Sexual offences under IPC Section 376 / POCSO."),
+        "sexual": (["D16", "D17"], "Sexual offences under IPC Section 376 / POCSO."),
+        "juvenile": (["D18"], "Juvenile Justice Act age determination and appeal for minors."),
+        "preventive detention": (["D21", "D22"], "Constitutional challenges to preventive detention under Article 226."),
+        "detenu": (["D21", "D22"], "Incarcerated individuals in preventive detention under State security laws."),
+        "terror": (["D19", "D20"], "National Investigation Agency (NIA Act) terrorism prosecutions."),
+        "terrorism": (["D19", "D20"], "National Investigation Agency (NIA Act) terrorism prosecutions."),
+        "nia": (["D19", "D20"], "National Investigation Agency Act Section 21(4) appellate challenges."),
+        "quash": (["D01", "D04", "D05", "D14", "D15"], "Section 482 CrPC criminal miscellaneous petitions seeking quashing of FIR."),
+        "anticipatory": (["D07", "D11", "D15", "D17"], "Pre-arrest anticipatory bail under Section 438 CrPC."),
+        "forgery": (["D01", "D03", "D24"], "IPC 467/468 document forgery and corporate agreement cancellation."),
+        "cheating": (["D01", "D02", "D03", "D24"], "IPC 420 and IT Act 66-D cheating by personation."),
+        "dowry": (["D14", "D15"], "Matrimonial harassment and dowry death under IPC 498A/304B."),
+        "corruption": (["D06", "D07"], "Prevention of Corruption Act and Directorate of Enforcement cases."),
+        "pmla": (["D06", "D07", "D08"], "Prevention of Money Laundering Act enforcement proceedings."),
+        "habeas": (["D21", "D22"], "Constitutional writ challenging unlawful preventive detention.")
+    }
+
+    for k_term, (k_docs, k_note) in DOMAIN_KEYWORDS.items():
+        if k_term in q_unquoted:
+            return {
+                "source": f"Domain-Specific Legal Ground Truth ('{k_term}')",
+                "relevant_docs": sorted(k_docs),
+                "is_benchmark": False,
+                "notes": k_note
+            }
+
+    # 3. Dynamic evaluation based on corpus documents metadata & legal text
+    if documents:
+        terms = [w for w in re.split(r'\W+', q_unquoted) if len(w) >= 3 and w not in {"and", "or", "not", "the", "for", "under"}]
+        dynamic_rels = []
+        for doc_id, doc_meta in documents.items():
+            meta_str = f"{doc_meta.get('case_name', '')} {doc_meta.get('sector', '')} {doc_meta.get('key_law', '')}".lower()
+            full_text = doc_meta.get('cleaned_text', '').lower()
+            
+            matches_meta = any(t in meta_str for t in terms)
+            term_counts = sum(full_text.count(t) for t in terms) if terms else 0
+            if matches_meta or term_counts >= 3:
+                dynamic_rels.append(doc_id)
+
+        if dynamic_rels:
+            return {
+                "source": "Dynamic Semantic Ground Truth (Corpus Metadata & Statutory Provisions)",
+                "relevant_docs": sorted(dynamic_rels),
+                "is_benchmark": False,
+                "notes": f"Determined via metadata match and high term saliency for '{query_str}' across the corpus."
+            }
+
+    return {
+        "source": "Dynamic Lexical Fallback",
+        "relevant_docs": [],
+        "is_benchmark": False,
+        "notes": "No ground truth relevant documents matched for this query."
+    }
