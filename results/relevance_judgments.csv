@@ -1,0 +1,376 @@
+query_id,query,query_type,document_id,relevance_label,reviewer_notes
+Q01,cyber,keyword,D01,1,Cases involving IT Act 66-D/66-G and cyber crime police station investigations.
+Q01,cyber,keyword,D02,1,Cases involving IT Act 66-D/66-G and cyber crime police station investigations.
+Q01,cyber,keyword,D03,1,Cases involving IT Act 66-D/66-G and cyber crime police station investigations.
+Q01,cyber,keyword,D04,1,Cases involving IT Act 66-D/66-G and cyber crime police station investigations.
+Q01,cyber,keyword,D05,1,Cases involving IT Act 66-D/66-G and cyber crime police station investigations.
+Q01,cyber,keyword,D06,0,Not primarily relevant to query scope.
+Q01,cyber,keyword,D07,0,Not primarily relevant to query scope.
+Q01,cyber,keyword,D08,0,Not primarily relevant to query scope.
+Q01,cyber,keyword,D09,0,Not primarily relevant to query scope.
+Q01,cyber,keyword,D10,0,Not primarily relevant to query scope.
+Q01,cyber,keyword,D11,0,Not primarily relevant to query scope.
+Q01,cyber,keyword,D12,0,Not primarily relevant to query scope.
+Q01,cyber,keyword,D13,0,Not primarily relevant to query scope.
+Q01,cyber,keyword,D14,0,Not primarily relevant to query scope.
+Q01,cyber,keyword,D15,0,Not primarily relevant to query scope.
+Q01,cyber,keyword,D16,0,Not primarily relevant to query scope.
+Q01,cyber,keyword,D17,0,Not primarily relevant to query scope.
+Q01,cyber,keyword,D18,0,Not primarily relevant to query scope.
+Q01,cyber,keyword,D19,0,Not primarily relevant to query scope.
+Q01,cyber,keyword,D20,0,Not primarily relevant to query scope.
+Q01,cyber,keyword,D21,0,Not primarily relevant to query scope.
+Q01,cyber,keyword,D22,0,Not primarily relevant to query scope.
+Q01,cyber,keyword,D23,0,Not primarily relevant to query scope.
+Q01,cyber,keyword,D24,0,Not primarily relevant to query scope.
+Q01,cyber,keyword,D25,0,Not primarily relevant to query scope.
+Q02,bail,keyword,D01,1,"Judgments with active bail determination under CrPC Sections 437, 438, 439."
+Q02,bail,keyword,D02,1,"Judgments with active bail determination under CrPC Sections 437, 438, 439."
+Q02,bail,keyword,D03,1,"Judgments with active bail determination under CrPC Sections 437, 438, 439."
+Q02,bail,keyword,D04,0,Not primarily relevant to query scope.
+Q02,bail,keyword,D05,0,Not primarily relevant to query scope.
+Q02,bail,keyword,D06,1,"Judgments with active bail determination under CrPC Sections 437, 438, 439."
+Q02,bail,keyword,D07,1,"Judgments with active bail determination under CrPC Sections 437, 438, 439."
+Q02,bail,keyword,D08,0,Not primarily relevant to query scope.
+Q02,bail,keyword,D09,1,"Judgments with active bail determination under CrPC Sections 437, 438, 439."
+Q02,bail,keyword,D10,1,"Judgments with active bail determination under CrPC Sections 437, 438, 439."
+Q02,bail,keyword,D11,1,"Judgments with active bail determination under CrPC Sections 437, 438, 439."
+Q02,bail,keyword,D12,1,"Judgments with active bail determination under CrPC Sections 437, 438, 439."
+Q02,bail,keyword,D13,0,Not primarily relevant to query scope.
+Q02,bail,keyword,D14,0,Not primarily relevant to query scope.
+Q02,bail,keyword,D15,1,"Judgments with active bail determination under CrPC Sections 437, 438, 439."
+Q02,bail,keyword,D16,1,"Judgments with active bail determination under CrPC Sections 437, 438, 439."
+Q02,bail,keyword,D17,1,"Judgments with active bail determination under CrPC Sections 437, 438, 439."
+Q02,bail,keyword,D18,1,"Judgments with active bail determination under CrPC Sections 437, 438, 439."
+Q02,bail,keyword,D19,0,Not primarily relevant to query scope.
+Q02,bail,keyword,D20,0,Not primarily relevant to query scope.
+Q02,bail,keyword,D21,0,Not primarily relevant to query scope.
+Q02,bail,keyword,D22,0,Not primarily relevant to query scope.
+Q02,bail,keyword,D23,0,Not primarily relevant to query scope.
+Q02,bail,keyword,D24,0,Not primarily relevant to query scope.
+Q02,bail,keyword,D25,0,Not primarily relevant to query scope.
+Q03,"""anticipatory bail""",phrase,D01,0,Not primarily relevant to query scope.
+Q03,"""anticipatory bail""",phrase,D02,0,Not primarily relevant to query scope.
+Q03,"""anticipatory bail""",phrase,D03,0,Not primarily relevant to query scope.
+Q03,"""anticipatory bail""",phrase,D04,0,Not primarily relevant to query scope.
+Q03,"""anticipatory bail""",phrase,D05,0,Not primarily relevant to query scope.
+Q03,"""anticipatory bail""",phrase,D06,0,Not primarily relevant to query scope.
+Q03,"""anticipatory bail""",phrase,D07,1,Explicit anticipatory bail applications under Section 438 CrPC.
+Q03,"""anticipatory bail""",phrase,D08,0,Not primarily relevant to query scope.
+Q03,"""anticipatory bail""",phrase,D09,0,Not primarily relevant to query scope.
+Q03,"""anticipatory bail""",phrase,D10,0,Not primarily relevant to query scope.
+Q03,"""anticipatory bail""",phrase,D11,1,Explicit anticipatory bail applications under Section 438 CrPC.
+Q03,"""anticipatory bail""",phrase,D12,0,Not primarily relevant to query scope.
+Q03,"""anticipatory bail""",phrase,D13,0,Not primarily relevant to query scope.
+Q03,"""anticipatory bail""",phrase,D14,0,Not primarily relevant to query scope.
+Q03,"""anticipatory bail""",phrase,D15,1,Explicit anticipatory bail applications under Section 438 CrPC.
+Q03,"""anticipatory bail""",phrase,D16,0,Not primarily relevant to query scope.
+Q03,"""anticipatory bail""",phrase,D17,1,Explicit anticipatory bail applications under Section 438 CrPC.
+Q03,"""anticipatory bail""",phrase,D18,0,Not primarily relevant to query scope.
+Q03,"""anticipatory bail""",phrase,D19,0,Not primarily relevant to query scope.
+Q03,"""anticipatory bail""",phrase,D20,0,Not primarily relevant to query scope.
+Q03,"""anticipatory bail""",phrase,D21,0,Not primarily relevant to query scope.
+Q03,"""anticipatory bail""",phrase,D22,0,Not primarily relevant to query scope.
+Q03,"""anticipatory bail""",phrase,D23,0,Not primarily relevant to query scope.
+Q03,"""anticipatory bail""",phrase,D24,0,Not primarily relevant to query scope.
+Q03,"""anticipatory bail""",phrase,D25,0,Not primarily relevant to query scope.
+Q04,PMLA,keyword,D01,0,Not primarily relevant to query scope.
+Q04,PMLA,keyword,D02,0,Not primarily relevant to query scope.
+Q04,PMLA,keyword,D03,0,Not primarily relevant to query scope.
+Q04,PMLA,keyword,D04,0,Not primarily relevant to query scope.
+Q04,PMLA,keyword,D05,0,Not primarily relevant to query scope.
+Q04,PMLA,keyword,D06,1,Directorate of Enforcement money laundering prosecutions under PMLA 2002.
+Q04,PMLA,keyword,D07,1,Directorate of Enforcement money laundering prosecutions under PMLA 2002.
+Q04,PMLA,keyword,D08,1,Directorate of Enforcement money laundering prosecutions under PMLA 2002.
+Q04,PMLA,keyword,D09,0,Not primarily relevant to query scope.
+Q04,PMLA,keyword,D10,0,Not primarily relevant to query scope.
+Q04,PMLA,keyword,D11,0,Not primarily relevant to query scope.
+Q04,PMLA,keyword,D12,0,Not primarily relevant to query scope.
+Q04,PMLA,keyword,D13,0,Not primarily relevant to query scope.
+Q04,PMLA,keyword,D14,0,Not primarily relevant to query scope.
+Q04,PMLA,keyword,D15,0,Not primarily relevant to query scope.
+Q04,PMLA,keyword,D16,0,Not primarily relevant to query scope.
+Q04,PMLA,keyword,D17,0,Not primarily relevant to query scope.
+Q04,PMLA,keyword,D18,0,Not primarily relevant to query scope.
+Q04,PMLA,keyword,D19,0,Not primarily relevant to query scope.
+Q04,PMLA,keyword,D20,0,Not primarily relevant to query scope.
+Q04,PMLA,keyword,D21,0,Not primarily relevant to query scope.
+Q04,PMLA,keyword,D22,0,Not primarily relevant to query scope.
+Q04,PMLA,keyword,D23,0,Not primarily relevant to query scope.
+Q04,PMLA,keyword,D24,0,Not primarily relevant to query scope.
+Q04,PMLA,keyword,D25,0,Not primarily relevant to query scope.
+Q05,"""habeas corpus""",phrase,D01,0,Not primarily relevant to query scope.
+Q05,"""habeas corpus""",phrase,D02,0,Not primarily relevant to query scope.
+Q05,"""habeas corpus""",phrase,D03,0,Not primarily relevant to query scope.
+Q05,"""habeas corpus""",phrase,D04,0,Not primarily relevant to query scope.
+Q05,"""habeas corpus""",phrase,D05,0,Not primarily relevant to query scope.
+Q05,"""habeas corpus""",phrase,D06,0,Not primarily relevant to query scope.
+Q05,"""habeas corpus""",phrase,D07,0,Not primarily relevant to query scope.
+Q05,"""habeas corpus""",phrase,D08,0,Not primarily relevant to query scope.
+Q05,"""habeas corpus""",phrase,D09,0,Not primarily relevant to query scope.
+Q05,"""habeas corpus""",phrase,D10,0,Not primarily relevant to query scope.
+Q05,"""habeas corpus""",phrase,D11,0,Not primarily relevant to query scope.
+Q05,"""habeas corpus""",phrase,D12,0,Not primarily relevant to query scope.
+Q05,"""habeas corpus""",phrase,D13,0,Not primarily relevant to query scope.
+Q05,"""habeas corpus""",phrase,D14,0,Not primarily relevant to query scope.
+Q05,"""habeas corpus""",phrase,D15,0,Not primarily relevant to query scope.
+Q05,"""habeas corpus""",phrase,D16,0,Not primarily relevant to query scope.
+Q05,"""habeas corpus""",phrase,D17,0,Not primarily relevant to query scope.
+Q05,"""habeas corpus""",phrase,D18,0,Not primarily relevant to query scope.
+Q05,"""habeas corpus""",phrase,D19,0,Not primarily relevant to query scope.
+Q05,"""habeas corpus""",phrase,D20,0,Not primarily relevant to query scope.
+Q05,"""habeas corpus""",phrase,D21,1,Writs under Article 226 and Supreme Court challenges to detention orders.
+Q05,"""habeas corpus""",phrase,D22,1,Writs under Article 226 and Supreme Court challenges to detention orders.
+Q05,"""habeas corpus""",phrase,D23,0,Not primarily relevant to query scope.
+Q05,"""habeas corpus""",phrase,D24,0,Not primarily relevant to query scope.
+Q05,"""habeas corpus""",phrase,D25,0,Not primarily relevant to query scope.
+Q06,NDPS,keyword,D01,0,Not primarily relevant to query scope.
+Q06,NDPS,keyword,D02,0,Not primarily relevant to query scope.
+Q06,NDPS,keyword,D03,0,Not primarily relevant to query scope.
+Q06,NDPS,keyword,D04,0,Not primarily relevant to query scope.
+Q06,NDPS,keyword,D05,0,Not primarily relevant to query scope.
+Q06,NDPS,keyword,D06,0,Not primarily relevant to query scope.
+Q06,NDPS,keyword,D07,0,Not primarily relevant to query scope.
+Q06,NDPS,keyword,D08,0,Not primarily relevant to query scope.
+Q06,NDPS,keyword,D09,1,Prosecutions under NDPS Act Section 20 and 8/21 for contraband possession.
+Q06,NDPS,keyword,D10,1,Prosecutions under NDPS Act Section 20 and 8/21 for contraband possession.
+Q06,NDPS,keyword,D11,0,Not primarily relevant to query scope.
+Q06,NDPS,keyword,D12,0,Not primarily relevant to query scope.
+Q06,NDPS,keyword,D13,0,Not primarily relevant to query scope.
+Q06,NDPS,keyword,D14,0,Not primarily relevant to query scope.
+Q06,NDPS,keyword,D15,0,Not primarily relevant to query scope.
+Q06,NDPS,keyword,D16,0,Not primarily relevant to query scope.
+Q06,NDPS,keyword,D17,0,Not primarily relevant to query scope.
+Q06,NDPS,keyword,D18,0,Not primarily relevant to query scope.
+Q06,NDPS,keyword,D19,0,Not primarily relevant to query scope.
+Q06,NDPS,keyword,D20,0,Not primarily relevant to query scope.
+Q06,NDPS,keyword,D21,0,Not primarily relevant to query scope.
+Q06,NDPS,keyword,D22,0,Not primarily relevant to query scope.
+Q06,NDPS,keyword,D23,0,Not primarily relevant to query scope.
+Q06,NDPS,keyword,D24,0,Not primarily relevant to query scope.
+Q06,NDPS,keyword,D25,0,Not primarily relevant to query scope.
+Q07,bail AND appeal,boolean_and,D01,0,Not primarily relevant to query scope.
+Q07,bail AND appeal,boolean_and,D02,0,Not primarily relevant to query scope.
+Q07,bail AND appeal,boolean_and,D03,0,Not primarily relevant to query scope.
+Q07,bail AND appeal,boolean_and,D04,0,Not primarily relevant to query scope.
+Q07,bail AND appeal,boolean_and,D05,0,Not primarily relevant to query scope.
+Q07,bail AND appeal,boolean_and,D06,1,Intersection of appellate jurisdiction and bail applications.
+Q07,bail AND appeal,boolean_and,D07,1,Intersection of appellate jurisdiction and bail applications.
+Q07,bail AND appeal,boolean_and,D08,0,Not primarily relevant to query scope.
+Q07,bail AND appeal,boolean_and,D09,0,Not primarily relevant to query scope.
+Q07,bail AND appeal,boolean_and,D10,0,Not primarily relevant to query scope.
+Q07,bail AND appeal,boolean_and,D11,1,Intersection of appellate jurisdiction and bail applications.
+Q07,bail AND appeal,boolean_and,D12,1,Intersection of appellate jurisdiction and bail applications.
+Q07,bail AND appeal,boolean_and,D13,0,Not primarily relevant to query scope.
+Q07,bail AND appeal,boolean_and,D14,0,Not primarily relevant to query scope.
+Q07,bail AND appeal,boolean_and,D15,0,Not primarily relevant to query scope.
+Q07,bail AND appeal,boolean_and,D16,1,Intersection of appellate jurisdiction and bail applications.
+Q07,bail AND appeal,boolean_and,D17,0,Not primarily relevant to query scope.
+Q07,bail AND appeal,boolean_and,D18,1,Intersection of appellate jurisdiction and bail applications.
+Q07,bail AND appeal,boolean_and,D19,1,Intersection of appellate jurisdiction and bail applications.
+Q07,bail AND appeal,boolean_and,D20,1,Intersection of appellate jurisdiction and bail applications.
+Q07,bail AND appeal,boolean_and,D21,0,Not primarily relevant to query scope.
+Q07,bail AND appeal,boolean_and,D22,0,Not primarily relevant to query scope.
+Q07,bail AND appeal,boolean_and,D23,0,Not primarily relevant to query scope.
+Q07,bail AND appeal,boolean_and,D24,0,Not primarily relevant to query scope.
+Q07,bail AND appeal,boolean_and,D25,0,Not primarily relevant to query scope.
+Q08,forgery AND cheating,boolean_and,D01,1,Joint invocation of cheating and falsification of documents.
+Q08,forgery AND cheating,boolean_and,D02,0,Not primarily relevant to query scope.
+Q08,forgery AND cheating,boolean_and,D03,1,Joint invocation of cheating and falsification of documents.
+Q08,forgery AND cheating,boolean_and,D04,0,Not primarily relevant to query scope.
+Q08,forgery AND cheating,boolean_and,D05,0,Not primarily relevant to query scope.
+Q08,forgery AND cheating,boolean_and,D06,0,Not primarily relevant to query scope.
+Q08,forgery AND cheating,boolean_and,D07,0,Not primarily relevant to query scope.
+Q08,forgery AND cheating,boolean_and,D08,0,Not primarily relevant to query scope.
+Q08,forgery AND cheating,boolean_and,D09,0,Not primarily relevant to query scope.
+Q08,forgery AND cheating,boolean_and,D10,0,Not primarily relevant to query scope.
+Q08,forgery AND cheating,boolean_and,D11,0,Not primarily relevant to query scope.
+Q08,forgery AND cheating,boolean_and,D12,0,Not primarily relevant to query scope.
+Q08,forgery AND cheating,boolean_and,D13,0,Not primarily relevant to query scope.
+Q08,forgery AND cheating,boolean_and,D14,0,Not primarily relevant to query scope.
+Q08,forgery AND cheating,boolean_and,D15,0,Not primarily relevant to query scope.
+Q08,forgery AND cheating,boolean_and,D16,0,Not primarily relevant to query scope.
+Q08,forgery AND cheating,boolean_and,D17,0,Not primarily relevant to query scope.
+Q08,forgery AND cheating,boolean_and,D18,0,Not primarily relevant to query scope.
+Q08,forgery AND cheating,boolean_and,D19,0,Not primarily relevant to query scope.
+Q08,forgery AND cheating,boolean_and,D20,0,Not primarily relevant to query scope.
+Q08,forgery AND cheating,boolean_and,D21,0,Not primarily relevant to query scope.
+Q08,forgery AND cheating,boolean_and,D22,0,Not primarily relevant to query scope.
+Q08,forgery AND cheating,boolean_and,D23,0,Not primarily relevant to query scope.
+Q08,forgery AND cheating,boolean_and,D24,1,Joint invocation of cheating and falsification of documents.
+Q08,forgery AND cheating,boolean_and,D25,0,Not primarily relevant to query scope.
+Q09,cyber OR extortion,boolean_or,D01,1,Union of cases citing IT Act provisions or coercive financial extortion.
+Q09,cyber OR extortion,boolean_or,D02,1,Union of cases citing IT Act provisions or coercive financial extortion.
+Q09,cyber OR extortion,boolean_or,D03,1,Union of cases citing IT Act provisions or coercive financial extortion.
+Q09,cyber OR extortion,boolean_or,D04,1,Union of cases citing IT Act provisions or coercive financial extortion.
+Q09,cyber OR extortion,boolean_or,D05,1,Union of cases citing IT Act provisions or coercive financial extortion.
+Q09,cyber OR extortion,boolean_or,D06,0,Not primarily relevant to query scope.
+Q09,cyber OR extortion,boolean_or,D07,0,Not primarily relevant to query scope.
+Q09,cyber OR extortion,boolean_or,D08,0,Not primarily relevant to query scope.
+Q09,cyber OR extortion,boolean_or,D09,0,Not primarily relevant to query scope.
+Q09,cyber OR extortion,boolean_or,D10,0,Not primarily relevant to query scope.
+Q09,cyber OR extortion,boolean_or,D11,0,Not primarily relevant to query scope.
+Q09,cyber OR extortion,boolean_or,D12,0,Not primarily relevant to query scope.
+Q09,cyber OR extortion,boolean_or,D13,0,Not primarily relevant to query scope.
+Q09,cyber OR extortion,boolean_or,D14,0,Not primarily relevant to query scope.
+Q09,cyber OR extortion,boolean_or,D15,0,Not primarily relevant to query scope.
+Q09,cyber OR extortion,boolean_or,D16,0,Not primarily relevant to query scope.
+Q09,cyber OR extortion,boolean_or,D17,1,Union of cases citing IT Act provisions or coercive financial extortion.
+Q09,cyber OR extortion,boolean_or,D18,0,Not primarily relevant to query scope.
+Q09,cyber OR extortion,boolean_or,D19,0,Not primarily relevant to query scope.
+Q09,cyber OR extortion,boolean_or,D20,0,Not primarily relevant to query scope.
+Q09,cyber OR extortion,boolean_or,D21,0,Not primarily relevant to query scope.
+Q09,cyber OR extortion,boolean_or,D22,0,Not primarily relevant to query scope.
+Q09,cyber OR extortion,boolean_or,D23,0,Not primarily relevant to query scope.
+Q09,cyber OR extortion,boolean_or,D24,0,Not primarily relevant to query scope.
+Q09,cyber OR extortion,boolean_or,D25,0,Not primarily relevant to query scope.
+Q10,bail AND NOT murder,boolean_not,D01,1,Excludes violent homicide trials (IPC 302) from bail consideration.
+Q10,bail AND NOT murder,boolean_not,D02,1,Excludes violent homicide trials (IPC 302) from bail consideration.
+Q10,bail AND NOT murder,boolean_not,D03,1,Excludes violent homicide trials (IPC 302) from bail consideration.
+Q10,bail AND NOT murder,boolean_not,D04,0,Not primarily relevant to query scope.
+Q10,bail AND NOT murder,boolean_not,D05,0,Not primarily relevant to query scope.
+Q10,bail AND NOT murder,boolean_not,D06,1,Excludes violent homicide trials (IPC 302) from bail consideration.
+Q10,bail AND NOT murder,boolean_not,D07,1,Excludes violent homicide trials (IPC 302) from bail consideration.
+Q10,bail AND NOT murder,boolean_not,D08,0,Not primarily relevant to query scope.
+Q10,bail AND NOT murder,boolean_not,D09,1,Excludes violent homicide trials (IPC 302) from bail consideration.
+Q10,bail AND NOT murder,boolean_not,D10,1,Excludes violent homicide trials (IPC 302) from bail consideration.
+Q10,bail AND NOT murder,boolean_not,D11,0,Not primarily relevant to query scope.
+Q10,bail AND NOT murder,boolean_not,D12,0,Not primarily relevant to query scope.
+Q10,bail AND NOT murder,boolean_not,D13,0,Not primarily relevant to query scope.
+Q10,bail AND NOT murder,boolean_not,D14,0,Not primarily relevant to query scope.
+Q10,bail AND NOT murder,boolean_not,D15,0,Not primarily relevant to query scope.
+Q10,bail AND NOT murder,boolean_not,D16,1,Excludes violent homicide trials (IPC 302) from bail consideration.
+Q10,bail AND NOT murder,boolean_not,D17,1,Excludes violent homicide trials (IPC 302) from bail consideration.
+Q10,bail AND NOT murder,boolean_not,D18,0,Not primarily relevant to query scope.
+Q10,bail AND NOT murder,boolean_not,D19,0,Not primarily relevant to query scope.
+Q10,bail AND NOT murder,boolean_not,D20,0,Not primarily relevant to query scope.
+Q10,bail AND NOT murder,boolean_not,D21,0,Not primarily relevant to query scope.
+Q10,bail AND NOT murder,boolean_not,D22,0,Not primarily relevant to query scope.
+Q10,bail AND NOT murder,boolean_not,D23,0,Not primarily relevant to query scope.
+Q10,bail AND NOT murder,boolean_not,D24,0,Not primarily relevant to query scope.
+Q10,bail AND NOT murder,boolean_not,D25,0,Not primarily relevant to query scope.
+Q11,"""commercial quantity""",phrase,D01,0,Not primarily relevant to query scope.
+Q11,"""commercial quantity""",phrase,D02,0,Not primarily relevant to query scope.
+Q11,"""commercial quantity""",phrase,D03,0,Not primarily relevant to query scope.
+Q11,"""commercial quantity""",phrase,D04,0,Not primarily relevant to query scope.
+Q11,"""commercial quantity""",phrase,D05,0,Not primarily relevant to query scope.
+Q11,"""commercial quantity""",phrase,D06,0,Not primarily relevant to query scope.
+Q11,"""commercial quantity""",phrase,D07,0,Not primarily relevant to query scope.
+Q11,"""commercial quantity""",phrase,D08,0,Not primarily relevant to query scope.
+Q11,"""commercial quantity""",phrase,D09,1,Rigorous statutory bar on bail for commercial narcotics haul.
+Q11,"""commercial quantity""",phrase,D10,1,Rigorous statutory bar on bail for commercial narcotics haul.
+Q11,"""commercial quantity""",phrase,D11,0,Not primarily relevant to query scope.
+Q11,"""commercial quantity""",phrase,D12,0,Not primarily relevant to query scope.
+Q11,"""commercial quantity""",phrase,D13,0,Not primarily relevant to query scope.
+Q11,"""commercial quantity""",phrase,D14,0,Not primarily relevant to query scope.
+Q11,"""commercial quantity""",phrase,D15,0,Not primarily relevant to query scope.
+Q11,"""commercial quantity""",phrase,D16,0,Not primarily relevant to query scope.
+Q11,"""commercial quantity""",phrase,D17,0,Not primarily relevant to query scope.
+Q11,"""commercial quantity""",phrase,D18,0,Not primarily relevant to query scope.
+Q11,"""commercial quantity""",phrase,D19,0,Not primarily relevant to query scope.
+Q11,"""commercial quantity""",phrase,D20,0,Not primarily relevant to query scope.
+Q11,"""commercial quantity""",phrase,D21,0,Not primarily relevant to query scope.
+Q11,"""commercial quantity""",phrase,D22,0,Not primarily relevant to query scope.
+Q11,"""commercial quantity""",phrase,D23,0,Not primarily relevant to query scope.
+Q11,"""commercial quantity""",phrase,D24,0,Not primarily relevant to query scope.
+Q11,"""commercial quantity""",phrase,D25,0,Not primarily relevant to query scope.
+Q12,"""Section 302""",phrase,D01,0,Not primarily relevant to query scope.
+Q12,"""Section 302""",phrase,D02,0,Not primarily relevant to query scope.
+Q12,"""Section 302""",phrase,D03,0,Not primarily relevant to query scope.
+Q12,"""Section 302""",phrase,D04,0,Not primarily relevant to query scope.
+Q12,"""Section 302""",phrase,D05,0,Not primarily relevant to query scope.
+Q12,"""Section 302""",phrase,D06,0,Not primarily relevant to query scope.
+Q12,"""Section 302""",phrase,D07,0,Not primarily relevant to query scope.
+Q12,"""Section 302""",phrase,D08,0,Not primarily relevant to query scope.
+Q12,"""Section 302""",phrase,D09,0,Not primarily relevant to query scope.
+Q12,"""Section 302""",phrase,D10,0,Not primarily relevant to query scope.
+Q12,"""Section 302""",phrase,D11,1,Direct invocation of murder charges under Section 302 IPC.
+Q12,"""Section 302""",phrase,D12,1,Direct invocation of murder charges under Section 302 IPC.
+Q12,"""Section 302""",phrase,D13,1,Direct invocation of murder charges under Section 302 IPC.
+Q12,"""Section 302""",phrase,D14,1,Direct invocation of murder charges under Section 302 IPC.
+Q12,"""Section 302""",phrase,D15,0,Not primarily relevant to query scope.
+Q12,"""Section 302""",phrase,D16,0,Not primarily relevant to query scope.
+Q12,"""Section 302""",phrase,D17,0,Not primarily relevant to query scope.
+Q12,"""Section 302""",phrase,D18,1,Direct invocation of murder charges under Section 302 IPC.
+Q12,"""Section 302""",phrase,D19,0,Not primarily relevant to query scope.
+Q12,"""Section 302""",phrase,D20,0,Not primarily relevant to query scope.
+Q12,"""Section 302""",phrase,D21,0,Not primarily relevant to query scope.
+Q12,"""Section 302""",phrase,D22,0,Not primarily relevant to query scope.
+Q12,"""Section 302""",phrase,D23,1,Direct invocation of murder charges under Section 302 IPC.
+Q12,"""Section 302""",phrase,D24,0,Not primarily relevant to query scope.
+Q12,"""Section 302""",phrase,D25,0,Not primarily relevant to query scope.
+Q13,detenu,keyword,D01,0,Not primarily relevant to query scope.
+Q13,detenu,keyword,D02,0,Not primarily relevant to query scope.
+Q13,detenu,keyword,D03,0,Not primarily relevant to query scope.
+Q13,detenu,keyword,D04,0,Not primarily relevant to query scope.
+Q13,detenu,keyword,D05,0,Not primarily relevant to query scope.
+Q13,detenu,keyword,D06,0,Not primarily relevant to query scope.
+Q13,detenu,keyword,D07,0,Not primarily relevant to query scope.
+Q13,detenu,keyword,D08,0,Not primarily relevant to query scope.
+Q13,detenu,keyword,D09,0,Not primarily relevant to query scope.
+Q13,detenu,keyword,D10,0,Not primarily relevant to query scope.
+Q13,detenu,keyword,D11,0,Not primarily relevant to query scope.
+Q13,detenu,keyword,D12,0,Not primarily relevant to query scope.
+Q13,detenu,keyword,D13,0,Not primarily relevant to query scope.
+Q13,detenu,keyword,D14,0,Not primarily relevant to query scope.
+Q13,detenu,keyword,D15,0,Not primarily relevant to query scope.
+Q13,detenu,keyword,D16,0,Not primarily relevant to query scope.
+Q13,detenu,keyword,D17,0,Not primarily relevant to query scope.
+Q13,detenu,keyword,D18,0,Not primarily relevant to query scope.
+Q13,detenu,keyword,D19,0,Not primarily relevant to query scope.
+Q13,detenu,keyword,D20,0,Not primarily relevant to query scope.
+Q13,detenu,keyword,D21,1,Incarcerated individual in preventive detention under State security laws.
+Q13,detenu,keyword,D22,1,Incarcerated individual in preventive detention under State security laws.
+Q13,detenu,keyword,D23,0,Not primarily relevant to query scope.
+Q13,detenu,keyword,D24,0,Not primarily relevant to query scope.
+Q13,detenu,keyword,D25,0,Not primarily relevant to query scope.
+Q14,dowry,keyword,D01,0,Not primarily relevant to query scope.
+Q14,dowry,keyword,D02,0,Not primarily relevant to query scope.
+Q14,dowry,keyword,D03,0,Not primarily relevant to query scope.
+Q14,dowry,keyword,D04,0,Not primarily relevant to query scope.
+Q14,dowry,keyword,D05,0,Not primarily relevant to query scope.
+Q14,dowry,keyword,D06,0,Not primarily relevant to query scope.
+Q14,dowry,keyword,D07,0,Not primarily relevant to query scope.
+Q14,dowry,keyword,D08,0,Not primarily relevant to query scope.
+Q14,dowry,keyword,D09,0,Not primarily relevant to query scope.
+Q14,dowry,keyword,D10,0,Not primarily relevant to query scope.
+Q14,dowry,keyword,D11,0,Not primarily relevant to query scope.
+Q14,dowry,keyword,D12,0,Not primarily relevant to query scope.
+Q14,dowry,keyword,D13,0,Not primarily relevant to query scope.
+Q14,dowry,keyword,D14,1,Prosecutions under Dowry Prohibition Act and IPC matrimonial sections.
+Q14,dowry,keyword,D15,1,Prosecutions under Dowry Prohibition Act and IPC matrimonial sections.
+Q14,dowry,keyword,D16,0,Not primarily relevant to query scope.
+Q14,dowry,keyword,D17,0,Not primarily relevant to query scope.
+Q14,dowry,keyword,D18,0,Not primarily relevant to query scope.
+Q14,dowry,keyword,D19,0,Not primarily relevant to query scope.
+Q14,dowry,keyword,D20,0,Not primarily relevant to query scope.
+Q14,dowry,keyword,D21,0,Not primarily relevant to query scope.
+Q14,dowry,keyword,D22,0,Not primarily relevant to query scope.
+Q14,dowry,keyword,D23,0,Not primarily relevant to query scope.
+Q14,dowry,keyword,D24,0,Not primarily relevant to query scope.
+Q14,dowry,keyword,D25,0,Not primarily relevant to query scope.
+Q15,executive,keyword,D01,0,Not primarily relevant to query scope.
+Q15,executive,keyword,D02,0,Not primarily relevant to query scope.
+Q15,executive,keyword,D03,0,Not primarily relevant to query scope.
+Q15,executive,keyword,D04,0,Not primarily relevant to query scope.
+Q15,executive,keyword,D05,0,Not primarily relevant to query scope.
+Q15,executive,keyword,D06,0,Not primarily relevant to query scope.
+Q15,executive,keyword,D07,0,Not primarily relevant to query scope.
+Q15,executive,keyword,D08,0,Not primarily relevant to query scope.
+Q15,executive,keyword,D09,1,Tests Porter over-stemming collision (execution vs executive) where Pipeline A suffers false positives.
+Q15,executive,keyword,D10,0,Not primarily relevant to query scope.
+Q15,executive,keyword,D11,0,Not primarily relevant to query scope.
+Q15,executive,keyword,D12,0,Not primarily relevant to query scope.
+Q15,executive,keyword,D13,0,Not primarily relevant to query scope.
+Q15,executive,keyword,D14,1,Tests Porter over-stemming collision (execution vs executive) where Pipeline A suffers false positives.
+Q15,executive,keyword,D15,0,Not primarily relevant to query scope.
+Q15,executive,keyword,D16,0,Not primarily relevant to query scope.
+Q15,executive,keyword,D17,0,Not primarily relevant to query scope.
+Q15,executive,keyword,D18,1,Tests Porter over-stemming collision (execution vs executive) where Pipeline A suffers false positives.
+Q15,executive,keyword,D19,0,Not primarily relevant to query scope.
+Q15,executive,keyword,D20,1,Tests Porter over-stemming collision (execution vs executive) where Pipeline A suffers false positives.
+Q15,executive,keyword,D21,0,Not primarily relevant to query scope.
+Q15,executive,keyword,D22,0,Not primarily relevant to query scope.
+Q15,executive,keyword,D23,1,Tests Porter over-stemming collision (execution vs executive) where Pipeline A suffers false positives.
+Q15,executive,keyword,D24,0,Not primarily relevant to query scope.
+Q15,executive,keyword,D25,0,Not primarily relevant to query scope.

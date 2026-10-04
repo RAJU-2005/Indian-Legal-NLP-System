@@ -1,0 +1,26 @@
+Document ID,File Name,Case Name,Court / Year,Sector,Key Law,Pages,Characters,Sentences,Tokens,Vocabulary Size,Extraction Status
+D01,case1177.PDF,Sonu Gupta v. State of U.P.,"Allahabad HC, 2020",Cyber,IPC forgery and cheating + IT Act 66G,6,13199,72,2440,596,SUCCESS
+D02,case0683.PDF,Parmod Devgan @ Ashu v. State of Haryana,"P&H HC, 2023",Cyber,IT Act 66-D (cheating by personation),4,6193,55,1165,354,SUCCESS
+D03,case0625.PDF,Vashist Tiwari v. State of U.P.,"Allahabad HC, 2019",Cyber,IT Act 66-D + IPC 420/467,3,5427,38,1010,314,SUCCESS
+D04,case0707.PDF,Prashanth Kumar M v. State of Karnataka,"Karnataka HC, 2024",Cyber,Cyber Crime Police Station case,3,4563,54,855,311,SUCCESS
+D05,case0647.PDF,Hu Xiaolin v. State of Karnataka,"Karnataka HC, 2023",Cyber,Cyber Crime Police Station case,4,8006,87,1487,376,SUCCESS
+D06,case1178.PDF,"Tarun Kumar v. Asst. Director, ED","Supreme Court, 2023",Economic / Corruption,Prevention of Corruption Act + PMLA,12,35209,196,6515,1236,SUCCESS
+D07,case0414.PDF,Deepak Kochhar v. Directorate of Enforcement,"Bombay HC, 2021",Economic / Financial,PMLA (money laundering),37,128406,1143,23823,2524,SUCCESS
+D08,case1181.PDF,Sanjay Agarwal v. Directorate of Enforcement,"Calcutta HC, 2022",Economic / Customs,"Gold export diversion, PMLA",11,33356,231,6315,1227,SUCCESS
+D09,case1064.PDF,Sovraj v. State (NCT Delhi),"Delhi HC, 2024",Narcotics,NDPS Act s.20,33,93661,690,17797,2185,SUCCESS
+D10,case0160.PDF,Shailendra Kumar Gupta @ Shailu v. State of U.P.,"Allahabad HC, 2020",Narcotics,"NDPS s.8/21, charas (commercial quantity)",21,63682,423,12182,1655,SUCCESS
+D11,case0741.PDF,Prahlad Singh Bhati v. NCT Delhi,"Supreme Court, 2001",Violent crime,"IPC 302, cancellation of bail",4,12326,65,2278,543,SUCCESS
+D12,case0152.PDF,Duddu Lazar v. State of A.P.,"Andhra Pradesh HC, 2021",Violent crime,"IPC 302/307/148 r/w 149, bail pending appeal",3,6239,25,1205,354,SUCCESS
+D13,case0270.PDF,Javid Ahmad Shah v. UT of J&K,"J&K HC, 2022",Violent crime,"Murder (s.302), criminal reference",6,16808,85,3104,733,SUCCESS
+D14,case0191.PDF,Smt. Radha v. State of U.P.,"Allahabad HC, 2007",Matrimonial / Dowry,"IPC 498-A, 304-B, Dowry Prohibition Act",8,29899,370,5706,796,SUCCESS
+D15,case0166.PDF,Balbir Kumar Datta v. The State,"Delhi HC, 2000",Matrimonial / Dowry,"Dowry harassment and suicide, bail cancellation",6,18757,172,3602,761,SUCCESS
+D16,case0715.PDF,Kondelu Krupa Rao v. State of A.P.,"Andhra Pradesh HC, 2024",Sexual offences / POCSO,"IPC 376(2)(i), POCSO, suspension of sentence",6,17316,98,3411,723,SUCCESS
+D17,case0590.PDF,Rajendra Thakkar v. State of M.P.,"M.P. HC, 2020",Sexual offences,IPC 376/376D/377 + IT Act 66-D,4,11505,68,2027,516,SUCCESS
+D18,case0078.PDF,Lalu Kumar @ Lal Babu v. State of Bihar,"Patna HC, 2019",Juvenile justice,Appeal involving minors aged 17 and 18,53,152448,941,30338,2153,SUCCESS
+D19,case0419.PDF,Mohamed Shariff v. NIA,"Karnataka HC, 2022",Terrorism / National security,NIA Act s.21(4) appeal,20,61144,321,11260,1501,SUCCESS
+D20,case0092.PDF,Redaul Hussain Khan v. NIA,"Gauhati HC, 2012",Terrorism / National security,Criminal appeal against NIA,71,237145,1255,47212,3459,SUCCESS
+D21,case1074.PDF,Brijendra Singh Yadav v. State of U.P.,"Allahabad HC, 2019",Preventive detention / Constitutional,"Habeas corpus, Article 226",10,33171,217,6325,1104,SUCCESS
+D22,case1091.PDF,Shaik Nazneen v. State of Telangana,"Supreme Court, 2022",Preventive detention / Constitutional,"Habeas corpus, chain-snatching detenu",12,34887,250,6621,832,SUCCESS
+D23,case0094.PDF,Salimbhai Abdulgaffar Shaikh v. State of Gujarat,"Gujarat HC, 2003",Communal riot / Public order,"Godhra railway case, IPC 143–153A, Public Property Act",46,167233,1279,31053,2696,SUCCESS
+D24,case1006.PDF,Harbhajan Singh Chopra v. Fountainhead Motels,"Delhi HC, 2015",Civil / Commercial,Civil suit to cancel a share subscription agreement,49,153676,1221,28733,2848,SUCCESS
+D25,case0635.PDF,Nita Chunilal Parmar v. Union of India,"Gujarat HC, 2020",Civil / Writ,Letters Patent Appeal from a Special Civil Application,4,7605,46,1385,394,SUCCESS

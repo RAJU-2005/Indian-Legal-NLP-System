@@ -1,0 +1,9 @@
+Sentence,Target Word,Focal Legal Term,NLTK Tag,spaCy Coarse POS,spaCy Fine Tag,Default Behavior Notes
+The appellant applied for anticipatory bail under Section 438 of the Code.,bail,bail,NN,NOUN,NN,Evaluated behavior of default taggers on legal word 'bail' in context.
+Learned counsel for the detenu argued that preventive detention was unconstitutional.,detenu,detenu,NN,NOUN,NN,Evaluated behavior of default taggers on legal word 'detenu' in context.
+The High Court exercised suo motu jurisdiction to review the illegal order.,suo,suo motu,JJ,PROPN,NNP,Evaluated behavior of default taggers on legal word 'suo' in context.
+The High Court exercised suo motu jurisdiction to review the illegal order.,motu,suo motu,NN,PROPN,NNP,Evaluated behavior of default taggers on legal word 'motu' in context.
+The petitioner sought quashing of the charge-sheet filed under Section 302 IPC.,quashing,quashing,NN,NOUN,NN,Evaluated behavior of default taggers on legal word 'quashing' in context.
+Learned counsel submitted that the commercial quantity of charas was not recovered.,learned,learned,N/A,N/A,N/A,Evaluated behavior of default taggers on legal word 'learned' in context.
+The Division Bench granted interim relief to the accused.,bench,bench,N/A,N/A,N/A,Evaluated behavior of default taggers on legal word 'bench' in context.
+The victim filed an affidavit before the trial court.,affidavit,affidavit,NN,NOUN,NN,Evaluated behavior of default taggers on legal word 'affidavit' in context.

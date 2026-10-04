@@ -1,0 +1,13 @@
+Source Text Excerpt,Predicted Entity,Predicted Type,Expected Type,Correctness,Reviewer Notes
+The High Court of Allahabad dismissed the criminal appeal filed by Sonu Gupta.,High Court of Allahabad,LEGAL_COURT,LEGAL_COURT,Correct,Accurately captured Indian judicial forum
+The High Court of Allahabad dismissed the criminal appeal filed by Sonu Gupta.,Sonu Gupta,PERSON,PERSON,Correct,Accurately recognized individual appellant
+The accused was charged under Section 302 of the Indian Penal Code.,Section 302,LEGAL_SECTION,LEGAL_SECTION,Correct,Statutory provision captured intact
+The accused was charged under Section 302 of the Indian Penal Code.,Indian Penal Code,LEGAL_STATUTE,LEGAL_STATUTE,Correct,Principal penal legislation captured
+The trial was conducted in New Delhi on 15 January 2024.,New Delhi,GPE,GPE,Correct,Geopolitical entity identified
+The trial was conducted in New Delhi on 15 January 2024.,15 January 2024,DATE,DATE,Correct,Temporal entity recognized
+"The applicant was granted bail upon furnishing a personal bond of ₹50,000.","₹50,000",MONEY,MONEY,Correct,Indian currency amount captured
+The Directorate of Enforcement initiated proceedings under PMLA.,Directorate of Enforcement,ORG,ORG,Correct,Enforcement agency identified as organization
+"In AIR 2020 SC 123, the Supreme Court settled the position of law.",AIR 2020 SC 123,LEGAL_CITATION,LEGAL_CITATION,Correct,Law report citation captured by domain pattern
+The detenu filed a writ petition under Article 226.,Article 226,LEGAL_SECTION,LEGAL_SECTION,Correct,Constitutional writ jurisdiction provision captured
+The appellant relied on the judgment in Lalita Kumari.,Lalita Kumari,PERSON,LEGAL_PRECEDENT,Incorrect,spaCy tagged case precedent name as generic PERSON
+The contraband was seized under Section 20 of NDPS Act.,NDPS Act,LEGAL_STATUTE,LEGAL_STATUTE,Correct,Narcotics statute identified

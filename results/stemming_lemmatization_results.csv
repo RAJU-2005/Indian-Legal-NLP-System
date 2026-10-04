@@ -1,0 +1,21 @@
+Word,Contextual POS,Porter Stem,Snowball Stem,Lancaster Stem,WordNet Lemma,spaCy Lemma,Phenomenon / Notes,Legal Distinction
+appellants,NOUN,appel,appel,appel,appellant,appellant,Accurate Lemmatization (retains exact legal singular noun),Parties appealing lower court verdict
+convicted,VERB,convict,convict,convict,convict,convict,Normal,Found guilty of statutory offense
+proceedings,NOUN,proceed,proceed,process,proceeding,proceeding,Normal,Judicial actions and case hearings
+execution,NOUN,execut,execut,execut,execution,execution,Over-stemming (confounds executive branch with execution of sentence/decree),"Carrying out of a decree, sentence, or contract"
+executive,ADJ,execut,execut,execut,executive,executive,Over-stemming (confounds executive branch with execution of sentence/decree),Administrative authority distinct from judiciary
+prosecutrix,NOUN,prosecutrix,prosecutrix,prosecutrix,prosecutrix,prosecutrix,Under-stemming (fails to link with prosecute/prosecutor),Female victim/complainant in criminal assault case
+anticipatory,ADJ,anticipatori,anticipatori,anticip,anticipatory,anticipatory,Normal,Pre-arrest protective relief (bail)
+judgments,NOUN,judgment,judgment,judg,judgment,judgment,Normal,Formal judicial determinations of court
+jurisdiction,NOUN,jurisdict,jurisdict,jurisdict,jurisdiction,jurisdiction,Normal,Legal authority of court to hear dispute
+statutory,ADJ,statutori,statutori,statut,statutory,statutory,Normal,Prescribed or enacted by legislation
+evidentiary,ADJ,evidentiari,evidentiari,evidenty,evidentiary,evidentiary,Over-stemming (leaves unnatural suffix 'evidentiari'),Relating to evidence admissibility
+evidence,NOUN,evid,evid,evid,evidence,evidence,Normal,Substantive materials presented to prove facts
+detention,NOUN,detent,detent,det,detention,detention,Normal,Confinement or custody of individual
+conspiracy,NOUN,conspiraci,conspiraci,conspir,conspiracy,conspiracy,Normal,Agreement between parties to commit unlawful act
+witnesses,NOUN,wit,wit,wit,witness,witness,Normal,Individuals testifying under oath
+petitioners,NOUN,petition,petition,petit,petitioner,petitioner,Normal,Parties instituting writ or appeal
+accused,NOUN,accus,accus,accus,accused,accuse,Normal,Person charged with criminal offense
+quashing,VERB,quash,quash,quash,quash,quash,Normal,Nullifying or voiding an FIR or charge-sheet
+affidavit,NOUN,affidavit,affidavit,affidavit,affidavit,affidavit,Normal,Sworn written declaration of fact
+sovereignty,NOUN,sovereignti,sovereignti,sovereignty,sovereignty,sovereignty,Normal,Supreme institutional state authority

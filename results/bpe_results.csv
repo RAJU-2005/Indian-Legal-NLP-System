@@ -1,0 +1,20 @@
+S.No.,Word / Expression,Category,BPE Tokens,BPE Subword Count,NLTK Tokens,spaCy Tokens,Custom Tokens,Hybrid Tokens,Subword Formation Behavior
+1,the,Common general,the,1,the,the,the,the,Single unified token
+2,court,Common legal,court,1,court,court,court,court,Single unified token
+3,order,Common legal,order,1,order,order,order,order,Single unified token
+4,appeal,Common legal,appeal,1,appeal,appeal,appeal,appeal,Single unified token
+5,accused,Common legal,accused,1,accused,accused,accused,accused,Single unified token
+6,jurisprudential,Rare lexical,juris | pr | ud | ential,4,jurisprudential,jurisprudential,jurisprudential,juris | pr | ud | ential,"Segmented into 4 subword units: ['juris', 'pr', 'ud', 'ential']"
+7,quashment,Rare morphological,quash | ment,2,quashment,quashment,quashment,quashment,"Segmented into 2 subword units: ['quash', 'ment']"
+8,circumstantiality,Rare morphological,circum | stan | ti | ality,4,circumstantiality,circumstantiality,circumstantiality,circum | stan | ti | ality,"Segmented into 4 subword units: ['circum', 'stan', 'ti', 'ality']"
+9,non-bailable,Hyphenated domain,non | - | bailable,3,non-bailable,non | - | bailable,non-bailable,non-bailable,"Segmented into 3 subword units: ['non', '-', 'bailable']"
+10,unconstitutionality,Rare morphological,unconstitutional | ity,2,unconstitutionality,unconstitutionality,unconstitutionality,unconstitutional | ity,"Segmented into 2 subword units: ['unconstitutional', 'ity']"
+11,bail,Domain core,bail,1,bail,bail,bail,bail,Single unified token
+12,anticipatory,Domain core,anticipatory,1,anticipatory,anticipatory,anticipatory,anticipatory,Single unified token
+13,habeas,Latin domain,ha | be | as,3,habeas,habeas,habeas,habeas,"Segmented into 3 subword units: ['ha', 'be', 'as']"
+14,corpus,Latin domain,cor | pus,2,corpus,corpus,corpus,corpus,"Segmented into 2 subword units: ['cor', 'pus']"
+15,PMLA,Statutory acronym,PMLA,1,PMLA,PMLA,PMLA,PMLA,Single unified token
+16,NDPS,Statutory acronym,NDPS,1,NDPS,NDPS,NDPS,NDPS,Single unified token
+17,Section 302,Statutory section,Section | 302,2,Section | 302,Section | 302,Section 302,Section 302,"Segmented into 2 subword units: ['Section', '302']"
+18,"₹50,000",Currency token,"[UNK] | 50 | , | 000",4,"₹50,000","₹ | 50,000","₹50,000","₹50,000","Segmented into 4 subword units: ['[UNK]', '50', ',', '000']"
+19,Crl.A. No. 123/2023,Court appeal citation,Crl | . | A | . | No | . | 12 | 3 | / | 2023,10,Crl.A | . | No | . | 123/2023,Crl | . | A. | No | . | 123/2023,Crl.A. No. 123/2023,Crl.A. No. 123/2023,"Segmented into 10 subword units: ['Crl', '.', 'A', '.', 'No', '.', '12', '3', '/', '2023']"

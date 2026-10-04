@@ -1,0 +1,16 @@
+Query,Query Type,Retrieved Documents,Number of Results,Execution Time (ms)
+cyber,keyword,D02 D03 D04 D05 D22,5,0.1
+bail,keyword,D01 D02 D03 D04 D05 D06 D07 D08 D09 D10 D11 D12 D13 D14 D15 D16 D17 D18 D19 D20 D21 D22 D23 D24 D25,25,0.07
+"""anticipatory bail""",phrase,D07 D08 D11 D15 D17 D23,6,0.02
+PMLA,keyword,D06 D07 D08,3,0.05
+"""habeas corpus""",phrase,D21 D22,2,0.02
+NDPS,keyword,D09 D10,2,0.03
+bail AND appeal,boolean_and,D06 D07 D08 D09 D10 D11 D12 D13 D16 D18 D19 D20 D22 D23 D24 D25,16,0.06
+forgery AND cheating,boolean_and,D24,1,0.06
+cyber OR extortion,boolean_or,D02 D03 D04 D05 D20 D21 D22,7,0.06
+bail AND NOT murder,boolean_not,D01 D02 D03 D04 D05 D08 D09 D14 D17 D18 D19 D22 D24 D25,14,0.13
+"""commercial quantity""",phrase,D09 D10,2,0.02
+"""Section 302""",phrase,D11 D12 D13 D14 D18 D23,6,0.02
+detenu,keyword,D21 D22 D23 D25,4,0.07
+dowry,keyword,D11 D14 D15,3,0.07
+executive,keyword,D09 D14 D18 D20 D23,5,0.04

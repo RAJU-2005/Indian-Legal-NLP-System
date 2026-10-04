@@ -1,0 +1,5 @@
+Measure,Before Processing,After Processing (Pipeline A),After Processing (Pipeline B)
+Documents,25.0,25.0,25.0
+Tokens,257849.0,129181.0,137952.0
+Unique Vocabulary Size,10819.0,8355.0,9005.0
+Average Document Length,10313.96,5167.24,5518.08

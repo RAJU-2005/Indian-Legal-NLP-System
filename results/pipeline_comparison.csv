@@ -1,0 +1,10 @@
+Measure,Pipeline A (Baseline),Pipeline B (Legal Optimized),Final Pipeline
+Token Count,129181,137952,137952
+Vocabulary Size,8355,9005,9005
+Mean Precision,0.7089,0.7721,0.7721
+Mean Recall,0.8904,0.8904,0.8904
+Mean F1-Score,0.7549,0.7979,0.7979
+Mean Precision@5,0.7444,0.8111,0.8111
+Mean Execution Time (ms),0.14,0.04,0.04
+Meaningful N-Grams Retained,Partial (Porter truncates legal stems),High (Preserves legal citations & valid lemmas),High (Pipeline B preserves legal semantics)
+Domain Citation Integrity,Low (Section numbers and citations fragmented),"High (Citations, Acts, and Sections preserved intact)",High (Full Statutory Integrity)

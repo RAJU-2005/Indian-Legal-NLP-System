@@ -1,0 +1,6 @@
+N-Gram,Total Count,Unique Count,Top 10 N-Grams
+Unigram,234381,9543,the (20133); of (12512); to (5344); in (5146); and (5066); is (3112); that (3069); a (2863); on (2709); by (2261)
+Bigram,234380,69527,of the (3875); in the (1596); by the (1110); that the (1051); to the (999); to be (662); on the (639); for the (609); it is (597); and the (548)
+Trigram,234379,133134,indian kanoon http (436); kanoon http indiankanoon (436); http indiankanoon org (436); indiankanoon org doc (436); of the act (293); the case of (286); the act of (281); in the case (250); act of 2015 (183); p o t (181)
+4-Gram,234378,171507,indian kanoon http indiankanoon (436); kanoon http indiankanoon org (436); http indiankanoon org doc (436); in the case of (223); the act of 2015 (183); of the act of (179); p o t a (163); the children s court (143); sj no 2117 of (141); no 2117 of 2019 (140)
+5-Gram,234377,191067,indian kanoon http indiankanoon org (436); kanoon http indiankanoon org doc (436); of the act of 2015 (149); sj no 2117 of 2019 (140); patna high court cr app (136); high court cr app sj (136); court cr app sj no (136); cr app sj no 2117 (136); app sj no 2117 of (136); no 2117 of 2019 dt (135)

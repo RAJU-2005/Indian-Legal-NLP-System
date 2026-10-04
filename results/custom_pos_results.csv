@@ -1,0 +1,8 @@
+Word,Context Sentence,Default POS (NLTK),Default Correctness,Custom Rule POS,Rule Correctness,Rule Applied,Custom ML POS,ML Correctness,Expected POS,Correction Explanation
+bail,The appellant applied for anticipatory bail under Section 438.,NN,Correct,NN,Correct,Rule_Bail_Contextual_Noun,NN,Correct,NN,"Bail is a substantive legal right/noun, not a verb"
+learned,Learned counsel for the detenu argued that the order was void.,VBN,Incorrect,JJ,Correct,Rule_Learned_Honorific_Adj,JJ,Correct,JJ,"Honorific judicial adjective modifying counsel, not past verb"
+quashing,The petitioner sought quashing of the malicious FIR.,NN,Correct,NN,Correct,Rule_Quashing_Nominal_Action,NN,Correct,NN,Gerund nominal functioning as head of noun phrase
+suo,The High Court took suo motu cognizance of the custodial violence.,NN,Incorrect,RB,Correct,Rule_Suo_Motu_Latin_Adverb,RB,Correct,RB,Latin adverbial modifier indicating 'on its own motion'
+detenu,The authorities detained the detenu without providing statutory grounds.,NN,Correct,NN,Correct,None,NN,Correct,NN,Specialized Indian legal noun for detained person
+bench,The Division Bench dismissed the commercial appeal.,NNP,Incorrect,NN,Correct,Rule_Bench_Judicial_Noun,NNP,Incorrect,NN,"Judicial forum/collegiate bench noun, not furniture or verb"
+non-bailable,The offence under PMLA is non-bailable and serious.,JJ,Correct,JJ,Correct,None,JJ,Correct,JJ,Compound statutory adjective qualifying criminal offense
