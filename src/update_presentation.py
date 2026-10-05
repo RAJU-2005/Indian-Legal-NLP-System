@@ -1,4 +1,6 @@
-<!DOCTYPE html>
+import re
+
+html_content = """<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -577,9 +579,7 @@
                     <div class="card-title" style="color:#34D399;"><i class="fa-solid fa-shield-halved"></i> 4 Domain-Aware Normalization Techniques</div>
                     <div class="card-body">
                         1. <b>Statutory Case-Folding:</b> Lowercases running text while shielding statutory uppercase acronyms (<code>IPC</code>, <code>CrPC</code>, <code>AIR</code>, <code>SCC</code>, <code>NDPS</code>) so legal authority is not degraded.<br/><br/>
-                        2. <b>Line-Break De-Hyphenation:</b> Repairs PDF/OCR broken words across line wraps (e.g. <code>crimi-
-nal</code> &rarr; <code>criminal</code>, <code>prose-
-cution</code> &rarr; <code>prosecution</code>).<br/><br/>
+                        2. <b>Line-Break De-Hyphenation:</b> Repairs PDF/OCR broken words across line wraps (e.g. <code>crimi-\nnal</code> &rarr; <code>criminal</code>, <code>prose-\ncution</code> &rarr; <code>prosecution</code>).<br/><br/>
                         3. <b>Quotation & Latin Maxim Retention:</b> Preserves quotation marks (<code>"..."</code>) and Latin doctrines (<code>mens rea</code>, <code>suo motu</code>, <code>ultra vires</code>) for exact phrase queries.<br/><br/>
                         4. <b>Sub-Clause Punctuation Protection:</b> Retains parentheses in statutory subsections (<code>Section 376(2)(i)</code>) and currency symbols (<code>₹50,000/-</code>).
                     </div>
@@ -607,8 +607,7 @@ cution</code> &rarr; <code>prosecution</code>).<br/><br/>
                 <div class="card card-green">
                     <div class="card-title" style="color:#34D399;"><i class="fa-solid fa-check"></i> Conservative Cleaning (Domain-Aware)</div>
                     <div class="card-body">
-                        • Normalizes line-break hyphenations (<code>crimi-
-nal</code> &rarr; <code>criminal</code>).<br/>
+                        • Normalizes line-break hyphenations (<code>crimi-\nnal</code> &rarr; <code>criminal</code>).<br/>
                         • Preserves quotation marks (<code>"..."</code>) for exact quoted phrase matching.<br/>
                         • Retains currency symbols (<code>₹</code>) and statutory sub-clause parentheses.<br/>
                         • Retains hyphenated legal constructs (<code>non-bailable</code>, <code>suo-motu</code>).
@@ -891,7 +890,7 @@ nal</code> &rarr; <code>criminal</code>).<br/>
             <div class="card card-blue">
                 <div class="card-title" style="color:#60A5FA;">The Positional Adjacency Verification Condition:</div>
                 <div class="card-body" style="font-size:0.95rem; text-align:center;">
-                    $$	ext{Match in Document } d \iff \exists p 	ext{ such that } p \in 	ext{Postings}(w_1)[d] \land (p+1) \in 	ext{Postings}(w_2)[d]$$
+                    $$\text{Match in Document } d \iff \exists p \text{ such that } p \in \text{Postings}(w_1)[d] \land (p+1) \in \text{Postings}(w_2)[d]$$
                 </div>
             </div>
 
@@ -986,7 +985,7 @@ nal</code> &rarr; <code>criminal</code>).<br/>
                     <div class="card-body">
                         1. <b>Sections:</b> <code>(?:Section|Sec\.|Article|Art\.)\s+\d+[A-Z]?(?:\(\d+\))*</code><br/>
                         2. <b>Monetary:</b> <code>(?:₹|Rs\.?)\s*[\d,]+(?:\/-)?</code><br/>
-                        3. <b>Latin Maxims:</b> <code>(?i)(?:suo\s+motu|mens\s+rea|habeas\s+corpus|prima\s+facie)</code><br/>
+                        3. <b>Latin Maxims:</b> <code>(?i)\b(?:suo\s+motu|mens\s+rea|habeas\s+corpus|prima\s+facie)\b</code><br/>
                         4. <b>Statutes:</b> <code>(?:IPC|CrPC|CPC|NDPS|PMLA|NIA|POCSO|IT\s+Act)</code>
                     </div>
                 </div>
@@ -1319,7 +1318,7 @@ nal</code> &rarr; <code>criminal</code>).<br/>
                         1. Fetch Postings(<code>'section'</code>): 1,420 positions in 22 docs.<br/>
                         2. Fetch Postings(<code>'302'</code>): 412 positions in 8 docs.<br/>
                         3. Fetch Postings(<code>'ipc'</code>): 890 positions in 19 docs.<br/>
-                        4. <b>Coordinate Iteration:</b> Checks if $pos(302) = pos(	ext{section}) + 1$ and $pos(	ext{ipc}) = pos(302) + 1$.<br/>
+                        4. <b>Coordinate Iteration:</b> Checks if $pos(302) = pos(\text{section}) + 1$ and $pos(\text{ipc}) = pos(302) + 1$.<br/>
                         • Complexity: $O(P_1 + P_2 + P_3)$ operations.<br/>
                         • <b>Query Latency:</b> <span style="color:#EF4444; font-weight:800;">0.14 ms</span>
                     </div>
@@ -1342,7 +1341,7 @@ nal</code> &rarr; <code>criminal</code>).<br/>
                 <div class="card-title" style="color:#FBBF24;"><i class="fa-solid fa-sliders"></i> Multi-Mode IR Engine Capabilities</div>
                 <div class="card-body">
                     • <b>Boolean Shunting-Yard:</b> <code>"anticipatory bail" AND NOT murder</code> &rarr; Postings(<code>anticipatory bail</code>) $\setminus$ Postings(<code>murder</code>) &rarr; Retrieves D07, D09, D14.<br/>
-                    • <b>Vector Space (TF-IDF Cosine):</b> $	ext{TF-IDF}(t,d) = (1 + \log 	ext{TF}_{t,d}) 	imes \log(N/	ext{DF}_t)$, length-normalized against document vector.
+                    • <b>Vector Space (TF-IDF Cosine):</b> $\text{TF-IDF}(t,d) = (1 + \log \text{TF}_{t,d}) \times \log(N/\text{DF}_t)$, length-normalized against document vector.
                 </div>
             </div>
         </div>
@@ -1586,3 +1585,9 @@ nal</code> &rarr; <code>criminal</code>).<br/>
     </script>
 </body>
 </html>
+"""
+
+with open("reports/Presentation.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
+
+print("Updated reports/Presentation.html successfully!")

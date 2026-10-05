@@ -1,4 +1,8 @@
-================================================================================
+import os
+import sys
+
+# 1. GENERATE PRESENTATION_SCRIPT.TXT and PRESENTATION_SCRIPT.MD
+script_text = """================================================================================
 NLP ASSESSMENT 1: DOMAIN-SPECIFIC TEXT ANALYSIS & RETRIEVAL SYSTEM FOR INDIAN LEGAL JUDGMENTS
 COMPLETE SPOKEN PRESENTATION SCRIPT & VIVA DEFENSE GUIDE
 ================================================================================
@@ -83,8 +87,8 @@ Empirically, our corpus comprises:
 
 Crucially, to keep normalization domain-aware, we engineered four specific techniques:
   1. Statutory Case-Folding: Standardizing running text to lowercase while shielding statutory uppercase acronyms (IPC, CrPC, AIR, SCC, NDPS) so legal authority is not degraded.
-  2. Line-Break De-Hyphenation: Normalizing OCR split words across line wraps (e.g., 'crimi-\nnal' -> 'criminal', 'prose-\ncution' -> 'prosecution').
-  3. Quotation & Latin Maxim Retention: Preserving double quotation marks ('"..."') and Latin doctrines ('mens rea', 'suo motu', 'ultra vires', 'habeas corpus') for exact phrase matching.
+  2. Line-Break De-Hyphenation: Normalizing OCR split words across line wraps (e.g., 'crimi-\\nnal' -> 'criminal', 'prose-\\ncution' -> 'prosecution').
+  3. Quotation & Latin Maxim Retention: Preserving double quotation marks ('\"...\"') and Latin doctrines ('mens rea', 'suo motu', 'ultra vires', 'habeas corpus') for exact phrase matching.
   4. Sub-Clause Punctuation Protection: Retaining parentheses in statutory sub-clauses ('Section 376(2)(i)') and Indian Rupee markers ('₹50,000/-')."
 
 --------------------------------------------------------------------------------
@@ -212,7 +216,7 @@ SLIDE 11: Phrase Matching via Positional Coordinate Merge
 [Shreerenu Speaks]:
 "Here is how phrase matching works in Pipeline A using Positional Coordinate Merge.
 
-When a user searches for '"anticipatory bail"':
+When a user searches for '\"anticipatory bail\"':
   1. The query terms are stemmed to 'anticipatori' and 'bail'.
   2. The engine loads the postings list for 'anticipatori' in D07: offsets [45, 112, 230].
   3. The engine loads the postings list for 'bail' in D07: offsets [46, 89, 113, 231].
@@ -268,10 +272,10 @@ SLIDE 14: Custom Legal Regular Expressions (Pipeline B)
 --------------------------------------------------------------------------------
 [Lavanya Speaks]:
 "To fix citation fragmentation, I built a Custom Legal Regex Tokenizer using prioritized regex patterns:
-  - Sections: (?:Section|Sec\.|Article|Art\.)\s+\d+[A-Z]?(?:\(\d+\))*
-  - Monetary: (?:₹|Rs\.?)\s*[\d,]+(?:\/-)?
-  - Latin Maxims: (?i)\b(?:suo\s+motu|mens\s+rea|habeas\s+corpus|prima\s+facie)\b
-  - Statutes: (?:IPC|CrPC|CPC|NDPS|PMLA|NIA|POCSO|IT\s+Act)
+  - Sections: (?:Section|Sec\\.|Article|Art\\.)\\s+\\d+[A-Z]?(?:\\(\\d+\\))*
+  - Monetary: (?:₹|Rs\\.?)\\s*[\\d,]+(?:\\/-)?
+  - Latin Maxims: (?i)\\b(?:suo\\s+motu|mens\\s+rea|habeas\\s+corpus|prima\\s+facie)\\b
+  - Statutes: (?:IPC|CrPC|CPC|NDPS|PMLA|NIA|POCSO|IT\\s+Act)
 
 Look at the tokenization comparison on: 'Bail under Section 438 CrPC of ₹50,000/-':
   - Pipeline A (NLTK) produces 10 fragmented tokens: ['Bail', 'under', 'Section', '438', 'CrPC', 'of', '₹', '50,000', '/', '-']
@@ -452,7 +456,7 @@ In Pipeline B (Direct Atomic Hash Lookup):
   - Zero coordinate joins needed! Complexity: O(1) hash access. Latency: 0.04 ms (3.5× faster! ⚡).
 
 Multi-Mode Capabilities:
-  - Boolean Shunting-Yard Parser: '"anticipatory bail" AND NOT murder' evaluates as Postings(anticipatory bail) minus Postings(murder), retrieving D07, D09, D14.
+  - Boolean Shunting-Yard Parser: '\"anticipatory bail\" AND NOT murder' evaluates as Postings(anticipatory bail) minus Postings(murder), retrieving D07, D09, D14.
   - Vector Space TF-IDF Cosine Retrieval: Calculates sublinear TF-IDF length-normalized cosine scores for ranked keyword queries like 'cyber fraud bank account'."
 
 --------------------------------------------------------------------------------
@@ -531,3 +535,13 @@ Thank you Ma'am and esteemed faculty. We welcome your questions!"
 ================================================================================
 END OF SCRIPT
 ================================================================================
+"""
+
+# Write script to text and markdown files
+with open("reports/Presentation_Script.txt", "w", encoding="utf-8") as f:
+    f.write(script_text)
+
+with open("reports/Presentation_Script.md", "w", encoding="utf-8") as f:
+    f.write(script_text)
+
+print("Created reports/Presentation_Script.txt and updated reports/Presentation_Script.md")
