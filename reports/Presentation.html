@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Domain-Specific Text Analysis & Retrieval System for Indian Legal Judgments — Presentation</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg-color: #0A0E1A;
+            --card-bg: #111827;
+            --card-border: #1E293B;
+            --accent-blue: #3B82F6;
+            --accent-gold: #D97706;
+            --accent-green: #10B981;
+            --accent-red: #EF4444;
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Progress Bar */
+        .progress-bar-container {
+            width: 100%;
+            height: 4px;
+            background: #1E293B;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 100;
+        }
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #3B82F6, #10B981);
+            width: 4%;
+            transition: width 0.3s ease;
+        }
+
+        /* Header Navigation Info */
+        .pres-header {
+            padding: 12px 28px;
+            background: rgba(17, 24, 39, 0.9);
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            z-index: 10;
+        }
+        .pres-header b {
+            color: var(--text-primary);
+        }
+        .speaker-badge {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60A5FA;
+            border: 1px solid rgba(59, 130, 246, 0.35);
+            padding: 3px 12px;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        /* Slide Container */
+        .deck-container {
+            flex: 1;
+            position: relative;
+            width: 100%;
+            height: calc(100vh - 100px);
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 32px 56px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.35s ease;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Slide Typography */
+        .slide-tag {
+            font-size: 0.82rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-gold);
+            margin-bottom: 6px;
+        }
+        .slide-title {
+            font-size: 1.85rem;
+            font-weight: 800;
+            color: #FFFFFF;
+            margin-bottom: 8px;
+            line-height: 1.25;
+        }
+        .slide-subtitle {
+            font-size: 0.96rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        /* Content Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        /* Cards */
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        }
+        .card-blue { border-left: 4px solid var(--accent-blue); }
+        .card-green { border-left: 4px solid var(--accent-green); }
+        .card-gold { border-left: 4px solid var(--accent-gold); }
+        .card-red { border-left: 4px solid var(--accent-red); }
+
+        .card-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .card-body {
+            font-size: 0.88rem;
+            color: #CBD5E1;
+            line-height: 1.6;
+        }
+        .card-body b {
+            color: #F8FAFC;
+        }
+        .card-body code {
+            background: #0B0F19;
+            color: #FBBF24;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'JetBrains Mono', Consolas, monospace;
+            font-size: 0.84rem;
+        }
+
+        /* Highlight Boxes */
+        .callout-box {
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 12px 18px;
+            margin: 10px 0;
+            font-size: 0.86rem;
+            line-height: 1.5;
+        }
+        .callout-danger {
+            border-left: 4px solid var(--accent-red);
+            background: rgba(239, 68, 68, 0.08);
+        }
+        .callout-success {
+            border-left: 4px solid var(--accent-green);
+            background: rgba(16, 185, 129, 0.08);
+        }
+
+        /* Metric KPI Badges */
+        .kpi-container {
+            display: flex;
+            gap: 14px;
+            margin-top: 14px;
+        }
+        .kpi-badge {
+            background: #0B0F19;
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 10px 16px;
+            flex: 1;
+            text-align: center;
+        }
+        .kpi-val {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: #60A5FA;
+        }
+        .kpi-label {
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-top: 3px;
+        }
+
+        /* Tables */
+        table.pres-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.84rem;
+            margin-top: 10px;
+        }
+        table.pres-table th, table.pres-table td {
+            border: 1px solid var(--card-border);
+            padding: 9px 14px;
+            text-align: left;
+        }
+        table.pres-table th {
+            background: #1E293B;
+            color: #94A3B8;
+            font-weight: 700;
+        }
+        table.pres-table tr:nth-child(even) {
+            background: rgba(30, 41, 59, 0.35);
+        }
+
+        /* Image Display */
+        .slide-img-container {
+            width: 100%;
+            max-height: 380px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+            background: #0B0F19;
+        }
+        .slide-img-container img {
+            max-width: 100%;
+            max-height: 360px;
+            object-fit: contain;
+        }
+
+        /* Bottom Controls */
+        .pres-footer {
+            height: 52px;
+            padding: 0 28px;
+            background: #111827;
+            border-top: 1px solid var(--card-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            z-index: 10;
+        }
+        .controls-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .btn-nav {
+            background: #1E293B;
+            color: #F8FAFC;
+            border: 1px solid #334155;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.15s ease;
+        }
+        .btn-nav:hover {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+        .slide-counter {
+            font-weight: 700;
+            color: #F8FAFC;
+            min-width: 90px;
+            text-align: center;
+        }
+
+        /* Title Slide Custom */
+        .title-hero {
+            text-align: center;
+            max-width: 860px;
+            margin: 0 auto;
+        }
+        .title-hero h1 {
+            font-size: 2.3rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #FFFFFF 0%, #93C5FD 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .title-hero .dept {
+            font-size: 1.05rem;
+            color: #94A3B8;
+            margin-bottom: 24px;
+        }
+        .team-box {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin-top: 28px;
+        }
+        .member-card {
+            background: #111827;
+            border: 1px solid var(--card-border);
+            border-radius: 10px;
+            padding: 16px 14px;
+            text-align: center;
+        }
+        .member-name {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #FFFFFF;
+        }
+        .member-role {
+            font-size: 0.74rem;
+            color: #60A5FA;
+            margin-top: 4px;
+            font-weight: 600;
+        }
+
+        /* Presenter Notes Overlay */
+        .notes-panel {
+            display: none;
+            position: fixed;
+            bottom: 56px;
+            right: 28px;
+            width: 440px;
+            max-height: 260px;
+            background: rgba(15, 23, 42, 0.96);
+            border: 1px solid var(--accent-gold);
+            border-radius: 10px;
+            padding: 16px;
+            font-size: 0.82rem;
+            line-height: 1.5;
+            color: #E2E8F0;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            z-index: 100;
+        }
+        .notes-panel.active { display: block; }
+        .notes-header {
+            font-weight: 700;
+            color: #FBBF24;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Progress Bar -->
+    <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar"></div>
+    </div>
+
+    <!-- Header Navigation Info -->
+    <div class="pres-header">
+        <div>
+            <span><b>Vidyashilp University</b> · School of Advanced Computing · NLP Assessment 1</span>
+        </div>
+        <div id="speakerBadge" class="speaker-badge">
+            👤 All Members Overview
+        </div>
+    </div>
+
+    <!-- Slide Deck Container -->
+    <div class="deck-container">
+
+        <!-- SLIDE 1: Title & Team Overview -->
+        <div class="slide active" data-speaker="Team Introduction" data-notes="Good morning Ma'am. We are presenting our project: Domain-Specific Text Analysis and Retrieval System for Indian Legal Judgments. We are a team of 4 members: Person 1 covers ingestion and baseline morphology; Person 2 handles stopwords, Pipeline A, and baseline index; Person 3 introduces custom legal tokenization, ML POS tagging, and NER; and Person 4 presents Pipeline B, dual-level indexing, and IR evaluation.">
+            <div class="title-hero">
+                <div class="slide-tag">Natural Language Processing · Seventh Semester</div>
+                <h1>Domain-Specific Text Analysis & Retrieval System for Indian Legal Judgments</h1>
+                <div class="dept">Comparative Engineering Study of Conventional Baseline (Pipeline A) vs. Legal-Domain-Optimized (Pipeline B)</div>
+                <div style="display:flex; justify-content:center; gap:10px;">
+                    <span style="background:rgba(59,130,246,0.15); color:#60A5FA; border:1px solid rgba(59,130,246,0.35); padding:4px 12px; border-radius:9999px; font-size:0.8rem; font-weight:600;">📜 25 Verified Judgments (D01–D25)</span>
+                    <span style="background:rgba(16,185,129,0.15); color:#34D399; border:1px solid rgba(16,185,129,0.35); padding:4px 12px; border-radius:9999px; font-size:0.8rem; font-weight:600;">🏆 Best Model: Pipeline B</span>
+                    <span style="background:rgba(217,119,6,0.15); color:#FBBF24; border:1px solid rgba(217,119,6,0.35); padding:4px 12px; border-radius:9999px; font-size:0.8rem; font-weight:600;">⚡ 15 Benchmark Legal Queries</span>
+                </div>
+
+                <div class="team-box">
+                    <div class="member-card">
+                        <div class="member-name">👤 Person 1</div>
+                        <div class="member-role">Data Ingestion, Text Cleaning & Baseline Tokenization</div>
+                    </div>
+                    <div class="member-card">
+                        <div class="member-name">👤 Person 2</div>
+                        <div class="member-role">Stopwords, Pipeline A Architecture & Positional Index</div>
+                    </div>
+                    <div class="member-card">
+                        <div class="member-name">👤 Person 3</div>
+                        <div class="member-role">Custom Legal Tokenizer, ML POS Tagger & Legal NER</div>
+                    </div>
+                    <div class="member-card">
+                        <div class="member-name">👤 Person 4</div>
+                        <div class="member-role">Contextual Lemmatization, Dual Index & IR Evaluation</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 2: Problem Statement & Why Legal NLP Fails -->
+        <div class="slide" data-speaker="Person 1: Foundations" data-notes="I will begin by explaining why general off-the-shelf NLP fails on Indian case law. Legal texts are not regular prose. Punctuation carries statutory meaning, section numbers combine numbers and sub-clauses, and removing functional words reverses criminal guilt.">
+            <div class="slide-tag">Problem Formulation · Indian Legal Jurisprudence</div>
+            <div class="slide-title">Why Generic Off-the-Shelf NLP Fails on Indian Case Law</div>
+            <div class="slide-subtitle">Statutory reasoning, compound citations, and criminal polarity demand domain-specialized text processing.</div>
+            
+            <div class="grid-3">
+                <div class="card card-red">
+                    <div class="card-title" style="color:#F87171;"><i class="fa-solid fa-scissors"></i> Citation Fragmentation</div>
+                    <div class="card-body">
+                        Standard tokenizers split legal provisions at punctuation:<br/><br/>
+                        <code>Section 302 IPC</code> &rarr; <code>['Section', '302', 'IPC']</code><br/><br/>
+                        Destroys compound statutory entities and floods postings lists with ambiguous numbers.
+                    </div>
+                </div>
+                <div class="card card-red">
+                    <div class="card-title" style="color:#F87171;"><i class="fa-solid fa-triangle-exclamation"></i> Semantic Liability Inversion</div>
+                    <div class="card-body">
+                        Standard stopword filters discard negation words:<br/><br/>
+                        <i>"applicant is <b>not</b> guilty"</i> &rarr; <code>['applicant', 'guilty']</code><br/><br/>
+                        Inverts criminal liability from innocence to guilt, corrupting search results!
+                    </div>
+                </div>
+                <div class="card card-red">
+                    <div class="card-title" style="color:#F87171;"><i class="fa-solid fa-burst"></i> Over-Stemming Collisions</div>
+                    <div class="card-body">
+                        Algorithmic stemmers (Porter) truncate endings blindly:<br/><br/>
+                        <code>execution</code> & <code>executive</code> &rarr; <code>execut</code><br/><br/>
+                        Collapses decree execution and executive magistrate, causing 8 false positives!
+                    </div>
+                </div>
+            </div>
+            <div class="callout-box callout-success" style="margin-top:20px;">
+                <b>The Assignment Framework:</b> Select &rarr; Order &rarr; Implement &rarr; Compare &rarr; Evaluate &rarr; Justify.
+            </div>
+        </div>
+
+        <!-- SLIDE 3: Corpus Ingestion & Dataset Statistics -->
+        <div class="slide" data-speaker="Person 1: Foundations" data-notes="Here is our dataset. We have 25 digital PDF judgments from the Supreme Court and High Courts. We extracted 257,849 tokens and 8,552 sentences. Document IDs D01 to D25 map directly to the instructor's Excel metadata.">
+            <div class="slide-tag">Module 1 · Dataset Ingestion</div>
+            <div class="slide-title">Authoritative Corpus Architecture (D01–D25)</div>
+            <div class="slide-subtitle">Extracted 25 full-text Indian Supreme Court & High Court judgments spanning 6 core legal sectors.</div>
+
+            <div class="grid-2">
+                <div class="card card-blue">
+                    <div class="card-title" style="color:#60A5FA;"><i class="fa-solid fa-scale-balanced"></i> Verified Legal Sectors</div>
+                    <div class="card-body">
+                        • <b>Cybercrime & IT Act:</b> D01–D05 (IT Act 66-D, online fraud, cheating)<br/>
+                        • <b>Economic Offenses / PMLA:</b> D06–D08 (ED prosecution, gold diversion)<br/>
+                        • <b>Narcotics (NDPS Act):</b> D09–D10 (Commercial quantity contraband)<br/>
+                        • <b>Violent Crimes (IPC 302):</b> D11–D13 (Homicide, bail appeals)<br/>
+                        • <b>Matrimonial / Dowry:</b> D14–D15 (IPC 498A/304B death)<br/>
+                        • <b>Preventive Detention:</b> D21–D22 (Article 226 Habeas Corpus)
+                    </div>
+                </div>
+                <div class="card card-gold">
+                    <div class="card-title" style="color:#FBBF24;"><i class="fa-solid fa-chart-pie"></i> Empirical Corpus Telemetry</div>
+                    <div class="card-body">
+                        <table class="pres-table">
+                            <tr><th>Corpus Metric</th><th>Empirical Value</th></tr>
+                            <tr><td>Total Judgments</td><td><b>25 Documents</b> (meets 15+ req.)</td></tr>
+                            <tr><td>Total Words / Tokens</td><td><b>257,849 tokens</b></td></tr>
+                            <tr><td>Total Sentences</td><td><b>8,552 sentences</b></td></tr>
+                            <tr><td>Vocabulary Size</td><td><b>10,819 unique words</b></td></tr>
+                            <tr><td>Average Document Length</td><td><b>10,314 tokens</b> (range: 855 to 47k)</td></tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 4: Text Cleaning: Conservative vs Aggressive -->
+        <div class="slide" data-speaker="Person 1: Foundations" data-notes="I designed the text cleaning stage. Aggressive cleaning strips all non-alphanumerics, which is disastrous in law because it destroys section sub-clauses and currency symbols. Conservative cleaning standardizes line-breaks while preserving quotes, clause brackets, and rupee symbols.">
+            <div class="slide-tag">Module 1 · Text Normalization</div>
+            <div class="slide-title">Conservative vs. Aggressive Text Cleaning</div>
+            <div class="slide-subtitle">Preserving statutory sub-clauses, currency markers, and quotation boundaries.</div>
+
+            <div class="grid-2">
+                <div class="card card-red">
+                    <div class="card-title" style="color:#F87171;"><i class="fa-solid fa-xmark"></i> Aggressive Cleaning (Flawed Baseline)</div>
+                    <div class="card-body">
+                        • Strips all punctuation and symbols indiscriminately.<br/>
+                        • <b>Example 1:</b> <code>₹50,000/-</code> &rarr; <code>50 000</code><br/>
+                        *(Currency symbol erased; number split into two meaningless pieces)*<br/><br/>
+                        • <b>Example 2:</b> <code>Section 376(2)(i) IPC</code> &rarr; <code>section 376 2 i ipc</code><br/>
+                        *(Sub-clause brackets deleted; destroys POCSO child rape threshold)*
+                    </div>
+                </div>
+                <div class="card card-green">
+                    <div class="card-title" style="color:#34D399;"><i class="fa-solid fa-check"></i> Conservative Cleaning (Domain-Aware)</div>
+                    <div class="card-body">
+                        • Normalizes line-break hyphenations (<code>crimi-\nnal</code> &rarr; <code>criminal</code>).<br/>
+                        • Preserves quotation marks (<code>"..."</code>) for exact quoted phrase matching.<br/>
+                        • Retains currency symbols (<code>₹</code>) and statutory sub-clause parentheses.<br/>
+                        • Retains hyphenated legal constructs (<code>non-bailable</code>, <code>suo-motu</code>).
+                    </div>
+                </div>
+            </div>
+            <div class="callout-box callout-success" style="margin-top:14px;">
+                <b>Engineering Outcome:</b> Preserved 100% of financial thresholds and penal clause definitions across all 25 PDF extractions.
+            </div>
+        </div>
+
+        <!-- SLIDE 5: Conventional Tokenization Paradigms -->
+        <div class="slide" data-speaker="Person 1: Foundations" data-notes="Next, I benchmarked conventional tokenizers. Whitespace keeps words together but leaves punctuation attached. NLTK word tokenizer uses Penn Treebank rules, which fragments citations. Look at Section 302 IPC—NLTK splits it into 3 tokens.">
+            <div class="slide-tag">Module 2 · Tokenization Evaluation</div>
+            <div class="slide-title">Conventional Tokenization & Citation Splitting</div>
+            <div class="slide-subtitle">Empirical evaluation of Whitespace and Standard NLTK Word Tokenizers on judicial text.</div>
+
+            <table class="pres-table">
+                <tr>
+                    <th>Input Judicial Sentence</th>
+                    <th>NLTK Word Tokenizer (Penn Treebank)</th>
+                    <th>Linguistic Defect Observed</th>
+                </tr>
+                <tr>
+                    <td><code>Section 302 IPC</code></td>
+                    <td><code>['Section', '302', 'IPC']</code></td>
+                    <td>Splits statutory unit into 3 pieces; searches match any section</td>
+                </tr>
+                <tr>
+                    <td><code>bail bond of ₹50,000/-</code></td>
+                    <td><code>['bail', 'bond', 'of', '₹', '50,000', '/', '-']</code></td>
+                    <td>Splits monetary fine into 4 isolated tokens</td>
+                </tr>
+                <tr>
+                    <td><code>writ of habeas corpus</code></td>
+                    <td><code>['writ', 'of', 'habeas', 'corpus']</code></td>
+                    <td>Latin maxim split; 'habeas' has no separate legal meaning</td>
+                </tr>
+            </table>
+
+            <div class="card card-gold" style="margin-top:18px;">
+                <div class="card-title" style="color:#FBBF24;"><i class="fa-solid fa-lightbulb"></i> Person 1 Rationale & Finding:</div>
+                <div class="card-body">
+                    Conventional tokenizers treat periods and spaces within legal citations as general word boundaries. This creates a severe dependency problem for downstream indexing: multi-word penal provisions require expensive positional merge operations in Pipeline A!
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 6: Morphological Stemming Experiments -->
+        <div class="slide" data-speaker="Person 1: Foundations" data-notes="For stemming in Pipeline A, why did we choose Porter over Lancaster? Lancaster is hyper-aggressive and cuts words destructively: legal becomes leg, custody becomes cust. Porter is more conservative. However, even Porter causes over-stemming collisions. I now hand over to Person 2.">
+            <div class="slide-tag">Module 2 · Morphological Reduction</div>
+            <div class="slide-title">Stemming Experiments: Why Porter? Why Not Lancaster?</div>
+            <div class="slide-subtitle">Justifying our choice of baseline stemmer through empirical comparison on judicial terms.</div>
+
+            <table class="pres-table">
+                <tr>
+                    <th>Legal Term</th>
+                    <th>Porter Stemmer</th>
+                    <th>Snowball Stemmer</th>
+                    <th>Lancaster Stemmer</th>
+                    <th>Engineering Justification</th>
+                </tr>
+                <tr>
+                    <td><code>legal</code></td>
+                    <td><code>legal</code></td>
+                    <td><code>legal</code></td>
+                    <td><code>leg</code> ⚠️</td>
+                    <td>Lancaster destroys root; conflates 'legal' with human 'leg'!</td>
+                </tr>
+                <tr>
+                    <td><code>custody</code></td>
+                    <td><code>custodi</code></td>
+                    <td><code>custodi</code></td>
+                    <td><code>cust</code> ⚠️</td>
+                    <td>Lancaster chops root too short ('cust'), losing identity</td>
+                </tr>
+                <tr>
+                    <td><code>bailment</code></td>
+                    <td><code>bailment</code></td>
+                    <td><code>bailment</code></td>
+                    <td><code>bail</code> ⚠️</td>
+                    <td>Lancaster incorrectly conflates 'bail' (surety) with 'bailment' (contract)</td>
+                </tr>
+                <tr>
+                    <td><code>appellants</code></td>
+                    <td><code>appel</code></td>
+                    <td><code>appel</code></td>
+                    <td><code>appl</code> ⚠️</td>
+                    <td>Lancaster conflates 'appellant' with 'apple' or 'apply'!</td>
+                </tr>
+            </table>
+
+            <div class="callout-box callout-danger" style="margin-top:14px;">
+                <b>Conclusion:</b> Lancaster is far too aggressive for legal retrieval. Porter was selected for Pipeline A as the calibrated baseline, but as Person 2 will demonstrate, Porter still suffers from fatal semantic collisions!
+            </div>
+        </div>
+
+        <!-- SLIDE 7: Stopwords & The Negation Inversion Problem -->
+        <div class="slide" data-speaker="Person 2: Baseline & Pipeline A" data-notes="Thank you Person 1. I am Person 2. I investigated stopwords and architected Pipeline A. Look at this slide: in standard NLP, stopwords are stripped to save space. But in criminal law, words like 'not' and 'no' determine whether an accused is innocent or guilty! Removing them inverts criminal liability.">
+            <div class="slide-tag">Module 2 · Semantic Polarity</div>
+            <div class="slide-title">Stopwords & The Catastrophic Inversion of Liability</div>
+            <div class="slide-subtitle">Why standard English stopword lists cannot be blindly applied to criminal jurisprudence.</div>
+
+            <div class="grid-2">
+                <div class="card card-red">
+                    <div class="card-title" style="color:#F87171;"><i class="fa-solid fa-ban"></i> Standard NLTK Stopword List (179 Words)</div>
+                    <div class="card-body">
+                        Purges functional grammar tokens unconditionally:<br/>
+                        <code>not</code>, <code>no</code>, <code>nor</code>, <code>without</code>, <code>unless</code>, <code>except</code>, <code>until</code>, <code>against</code><br/><br/>
+                        <b>Catastrophic Inversion in Case Law:</b><br/>
+                        • <i>"applicant is <b>not guilty</b>"</i> &rarr; <code>['applicant', 'guilty']</code><br/>
+                        • <i>"order passed <b>without jurisdiction</b>"</i> &rarr; <code>['order', 'passed', 'jurisdiction']</code><br/>
+                        • <i>"<b>no offence</b> made out"</i> &rarr; <code>['offence', 'made']</code>
+                    </div>
+                </div>
+                <div class="card card-blue">
+                    <div class="card-title" style="color:#60A5FA;"><i class="fa-solid fa-shield-halved"></i> Impact on Information Retrieval</div>
+                    <div class="card-body">
+                        If a lawyer searches for judgments where an accused was <b>"not guilty"</b> under PMLA:<br/><br/>
+                        • With standard stopword removal, the query becomes <code>['guilty']</code>.<br/>
+                        • The search engine retrieves all judgments where the accused was found <b>guilty</b>!<br/>
+                        • <b>Precision collapses to 0%</b> for all negative condition queries!
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 8: The Protected Legal Stopword Policy -->
+        <div class="slide" data-speaker="Person 2: Baseline & Pipeline A" data-notes="To solve this, I formulated our Protected Legal Stopword Policy. We whitelist 8 critical polarity and condition terms. We still remove general fluff like 'the', 'is', 'at', reducing the corpus by 49.9%, but we protect the statutory truth.">
+            <div class="slide-tag">Module 2 · Stopword Engineering</div>
+            <div class="slide-title">The Protected Legal Stopword Policy</div>
+            <div class="slide-subtitle">Formulating an authoritative polarity whitelist while maintaining corpus reduction.</div>
+
+            <div class="card card-green">
+                <div class="card-title" style="color:#34D399;"><i class="fa-solid fa-shield-virus"></i> The 8 Protected Polarity & Condition Operators:</div>
+                <div class="card-body" style="font-size:1.05rem; text-align:center; padding:10px 0;">
+                    <code>not</code> &nbsp;·&nbsp; <code>no</code> &nbsp;·&nbsp; <code>never</code> &nbsp;·&nbsp; <code>without</code> &nbsp;·&nbsp; <code>unless</code> &nbsp;·&nbsp; <code>except</code> &nbsp;·&nbsp; <code>until</code> &nbsp;·&nbsp; <code>against</code>
+                </div>
+            </div>
+
+            <div class="grid-3" style="margin-top:16px;">
+                <div class="kpi-badge">
+                    <div class="kpi-val">257,849</div>
+                    <div class="kpi-label">Raw Corpus Tokens</div>
+                </div>
+                <div class="kpi-badge">
+                    <div class="kpi-val">129,181</div>
+                    <div class="kpi-label">Pipeline A Post-Stopwords</div>
+                </div>
+                <div class="kpi-badge">
+                    <div class="kpi-val" style="color:#10B981;">49.9% Reduction</div>
+                    <div class="kpi-label">Corpus Compression Achieved</div>
+                </div>
+            </div>
+            <div class="callout-box callout-success" style="margin-top:14px;">
+                <b>Design Decision:</b> Both Pipeline A and Pipeline B incorporate this protected negation policy so that the comparative evaluation reflects morphological and tokenization differences, rather than simple polarity errors.
+            </div>
+        </div>
+
+        <!-- SLIDE 9: Pipeline A Architecture Diagram -->
+        <div class="slide" data-speaker="Person 2: Baseline & Pipeline A" data-notes="Here is the complete architecture of Pipeline A that I orchestrated. Raw PDF goes through conservative cleaning, standard NLTK word tokenization, protected stopwords, Porter stemming, and into a word-level positional inverted index. Notice the three red warning callouts illustrating where Pipeline A suffers.">
+            <div class="slide-tag">Module 3 · Baseline Architecture</div>
+            <div class="slide-title">Pipeline A: Conventional Baseline Architecture</div>
+            <div class="slide-subtitle">Sequential data-flow of the conventional baseline pipeline with embedded failure callouts.</div>
+
+            <div class="slide-img-container">
+                <img src="pipeline_a_flowchart.jpg" alt="Pipeline A Architecture Flowchart">
+            </div>
+        </div>
+
+        <!-- SLIDE 10: Word-Level Positional Indexing -->
+        <div class="slide" data-speaker="Person 2: Baseline & Pipeline A" data-notes="I implemented the positional inverted index for Pipeline A. It stores terms mapped to document IDs, sentence IDs, and word offsets. It indexes 8,355 unique stemmed terms across all 25 judgments.">
+            <div class="slide-tag">Module 3 · Inverted Index Architecture</div>
+            <div class="slide-title">Pipeline A: Word-Level Positional Inverted Index</div>
+            <div class="slide-subtitle">Coordinate tracking across document, sentence, and word offsets.</div>
+
+            <div class="grid-2">
+                <div class="card card-blue">
+                    <div class="card-title" style="color:#60A5FA;"><i class="fa-solid fa-database"></i> Postings List Data Structure</div>
+                    <div class="card-body">
+                        Each stemmed term maps to a postings dictionary:<br/><br/>
+                        <code>'execut': {<br/>
+                        &nbsp;&nbsp;'D08': [(s:14, w:3), (s:42, w:11)],<br/>
+                        &nbsp;&nbsp;'D14': [(s:5, w:12)],<br/>
+                        &nbsp;&nbsp;'D24': [(s:112, w:7), (s:115, w:2)]<br/>
+                        }</code><br/><br/>
+                        • <b>Document Frequency (DF):</b> Number of judgments containing term.<br/>
+                        • <b>Term Frequency (TF):</b> Occurrence count per judgment.
+                    </div>
+                </div>
+                <div class="card card-gold">
+                    <div class="card-title" style="color:#FBBF24;"><i class="fa-solid fa-list-check"></i> Index Properties (Pipeline A)</div>
+                    <div class="card-body">
+                        • <b>Indexed Stems:</b> 8,355 unique vocabulary terms.<br/>
+                        • <b>Storage Mode:</b> In-memory Python hash table with JSON persistence (`inverted_index.json`).<br/>
+                        • <b>Phrase Matching Algorithm:</b> Positional merge requiring $pos(w_2) = pos(w_1) + 1$.<br/>
+                        • <b>Latency:</b> 0.14 ms average query execution.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 11: Phrase Matching via Positional Merge -->
+        <div class="slide" data-speaker="Person 2: Baseline & Pipeline A" data-notes="To search for a phrase in Pipeline A, like 'anticipatory bail', we must perform a positional merge. We load postings for 'anticipatori' and postings for 'bail', and check if bail immediately follows anticipatori. This works, but it requires coordinate joins across multiple terms.">
+            <div class="slide-tag">Module 4 · Information Retrieval</div>
+            <div class="slide-title">Phrase Matching via Positional Coordinate Merge</div>
+            <div class="slide-subtitle">How Pipeline A resolves quoted multi-word phrase queries across stemmed postings.</div>
+
+            <div class="card card-blue">
+                <div class="card-title" style="color:#60A5FA;">The Positional Adjacency Verification Condition:</div>
+                <div class="card-body" style="font-size:0.95rem; text-align:center;">
+                    $$\text{Match in Document } d \iff \exists p \text{ such that } p \in \text{Postings}(w_1)[d] \land (p+1) \in \text{Postings}(w_2)[d]$$
+                </div>
+            </div>
+
+            <div class="card card-gold" style="margin-top:16px;">
+                <div class="card-title" style="color:#FBBF24;">Example: Searching for <code>"anticipatory bail"</code> in Pipeline A</div>
+                <div class="card-body">
+                    1. Query is stemmed: <code>"anticipatori bail"</code><br/>
+                    2. Load Postings for <code>'anticipatori'</code> in D07: offsets <code>[45, 112, 230]</code><br/>
+                    3. Load Postings for <code>'bail'</code> in D07: offsets <code>[46, 89, 113, 231]</code><br/>
+                    4. Check adjacency: $45+1=46$ (Match!), $112+1=113$ (Match!), $230+1=231$ (Match!)<br/>
+                    5. Document D07 retrieved! <b>Bottleneck:</b> Requires loading multiple postings lists and running $O(N+M)$ coordinate intersections.
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 12: Pipeline A Critical Failure Analysis -->
+        <div class="slide" data-speaker="Person 2: Baseline & Pipeline A" data-notes="Now, look at the critical failure point I discovered in Pipeline A. The classic Porter over-stemming collision between 'execution' and 'executive'. Both become 'execut'. When a user searches for 'executive', Pipeline A retrieves 13 judgments! 8 of them are false positives about decree executions. Precision collapses to 38.5%! Person 3 and 4 will now show how Pipeline B solved this.">
+            <div class="slide-tag">Failure Analysis · Pipeline A Vulnerability</div>
+            <div class="slide-title">The Classic Porter Over-Stemming Collision in Indian Law</div>
+            <div class="slide-subtitle">Why Porter stemming causes an unacceptable collapse in legal retrieval precision.</div>
+
+            <div class="grid-2">
+                <div class="card card-red">
+                    <div class="card-title" style="color:#F87171;"><i class="fa-solid fa-link-slash"></i> Two Completely Different Legal Concepts:</div>
+                    <div class="card-body">
+                        1. <b>Execution:</b> Enforcement of a civil money decree, mortgage, or death warrant.<br/>
+                        2. <b>Executive:</b> Executive magistrate, detention authority, or government office.<br/><br/>
+                        • <b>Porter Stemmer:</b> Truncates both words to: <code>execut</code><br/>
+                        • <b>Postings List:</b> Combines all decree executions and executive authorities into one single bucket!
+                    </div>
+                </div>
+                <div class="card card-red">
+                    <div class="card-title" style="color:#F87171;"><i class="fa-solid fa-chart-line-down"></i> Catastrophic IR Result for Query: <code>"executive"</code></div>
+                    <div class="card-body">
+                        • <b>Total Retrieved:</b> 13 Judgments<br/>
+                        • <b>True Relevant Cases:</b> 5 Judgments (D09, D14, D18, D20, D23)<br/>
+                        • <b>False Positives:</b> 8 Judgments (decree money executions in D24, D25, D01)<br/>
+                        • <b>Precision in Pipeline A:</b> <span style="font-size:1.2rem; font-weight:800; color:#EF4444;">38.5% (Dismal!)</span><br/>
+                        • <b>F1-Score in Pipeline A:</b> 55.6%
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 13: Transition to Pipeline B -->
+        <div class="slide" data-speaker="Person 3: Domain NLP Innovations" data-notes="Hello Ma'am. I am Person 3. Seeing the failures identified by Person 1 and 2—citation fragmentation, POS errors, and over-stemming—I developed the domain NLP components for Pipeline B: the Custom Legal Regex Tokenizer, Custom POS Tagging with Machine Learning, and Legal Named Entity Recognition.">
+            <div class="slide-tag">Paradigm Shift · Engineering Pipeline B</div>
+            <div class="slide-title">The Solution: Legal-Domain-Optimized Architecture</div>
+            <div class="slide-subtitle">Transitioning from generic baseline processing to domain-preserving legal NLP engineering.</div>
+
+            <div class="grid-3">
+                <div class="card card-green">
+                    <div class="card-title" style="color:#34D399;"><i class="fa-solid fa-code"></i> Custom Legal Regex</div>
+                    <div class="card-body">
+                        Preserves statutory sections, constitutional articles, currency, and Latin maxims as <b>atomic, single tokens</b>.
+                    </div>
+                </div>
+                <div class="card card-green">
+                    <div class="card-title" style="color:#34D399;"><i class="fa-solid fa-brain"></i> ML POS Classifier</div>
+                    <div class="card-body">
+                        Trained a <b>Logistic Regression POS Classifier</b> (76.7% accuracy) resolving Penn Treebank errors on legal court idioms.
+                    </div>
+                </div>
+                <div class="card card-green">
+                    <div class="card-title" style="color:#34D399;"><i class="fa-solid fa-tags"></i> Legal NER & BPE</div>
+                    <div class="card-body">
+                        Extracted statutory entities (<code>LEGAL_SECTION</code>, <code>LEGAL_COURT</code>) and trained a 6,000-vocabulary BPE model.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 14: Custom Legal Regex Tokenizer -->
+        <div class="slide" data-speaker="Person 3: Domain NLP Innovations" data-notes="Here is the Custom Legal Regex Tokenizer I engineered. Instead of splitting text blindly, it uses prioritized regular expression rules. It looks for statutory patterns like 'Section 302 IPC', 'Article 21', '₹50,000', and 'habeas corpus' and indexes them as single atomic units.">
+            <div class="slide-tag">Module 2 · Domain Tokenization</div>
+            <div class="slide-title">Custom Legal Regex Tokenizer Implementation</div>
+            <div class="slide-subtitle">Protecting compound judicial entities as single atomic tokens before linguistic splitting.</div>
+
+            <div class="card card-blue">
+                <div class="card-title" style="color:#60A5FA;"><i class="fa-solid fa-code"></i> Prioritized Legal Regex Pattern Set:</div>
+                <div class="card-body">
+                    <code>r'(?:Section|Sec\.|s\.)\s+\d+[A-Z]?(?:\(\d+\))*(?:\s+(?:IPC|CrPC|CPC|NDPS|PMLA))?'</code> &rarr; <i>Section 302 IPC</i><br/>
+                    <code>r'(?:Article|Art\.)\s+\d+[A-Z]?'</code> &rarr; <i>Article 21</i><br/>
+                    <code>r'(?:₹|Rs\.?)\s*\d+(?:,\d+)*(?:\/-)?'</code> &rarr; <i>₹50,000/-</i><br/>
+                    <code>r'\b(?:habeas\s+corpus|suo\s+motu|mens\s+rea|prima\s+facie)\b'</code> &rarr; <i>habeas corpus</i>
+                </div>
+            </div>
+
+            <table class="pres-table" style="margin-top:14px;">
+                <tr><th>Input Expression</th><th>Pipeline A Tokens</th><th>Pipeline B Tokens (Custom Legal)</th></tr>
+                <tr><td><code>Section 302 IPC</code></td><td><code>['Section', '302', 'IPC']</code> (3 tokens)</td><td><code>['Section 302 IPC']</code> <b>(1 atomic token)</b></td></tr>
+                <tr><td><code>Article 21 Constitution</code></td><td><code>['Article', '21', 'Constitution']</code></td><td><code>['Article 21', 'Constitution']</code> <b>(Article preserved)</b></td></tr>
+                <tr><td><code>fine of ₹50,000/-</code></td><td><code>['fine', 'of', '₹', '50,000', '/', '-']</code></td><td><code>['fine', 'of', '₹50,000']</code> <b>(Currency intact)</b></td></tr>
+            </table>
+        </div>
+
+        <!-- SLIDE 15: Custom POS Tagging: Rule-Based Corrections -->
+        <div class="slide" data-speaker="Person 3: Domain NLP Innovations" data-notes="Next is POS tagging. Default NLTK and Penn Treebank taggers make glaring mistakes on legal syntax. Look at 'learned counsel'—NLTK tags 'learned' as a past verb VBN! But in court, it is an honorific adjective JJ. I wrote rule-based correctors to fix these recurring legal idioms.">
+            <div class="slide-tag">Module 2 · Syntactic Tagging</div>
+            <div class="slide-title">Part-of-Speech Tagging Anomalies in Legal Syntax</div>
+            <div class="slide-subtitle">Resolving Penn Treebank misclassifications through domain-specific contextual rules.</div>
+
+            <table class="pres-table">
+                <tr>
+                    <th>Legal Syntax Sample</th>
+                    <th>Target Word</th>
+                    <th>NLTK Default Tag</th>
+                    <th>Custom Legal POS</th>
+                    <th>Linguistic / Legal Rationale</th>
+                </tr>
+                <tr>
+                    <td><i>"The <b>learned</b> counsel argued..."</i></td>
+                    <td><code>learned</code></td>
+                    <td><code>VBN</code> (Past Verb) ❌</td>
+                    <td><code>JJ</code> (Adjective) ✅</td>
+                    <td>Honorific adjective modifying counsel, not past tense action</td>
+                </tr>
+                <tr>
+                    <td><i>"Petitioner sought <b>quashing</b> of FIR"</i></td>
+                    <td><code>quashing</code></td>
+                    <td><code>VBG</code> (Participle Verb) ❌</td>
+                    <td><code>NN</code> (Noun) ✅</td>
+                    <td>Substantive legal remedy noun under Section 482 CrPC</td>
+                </tr>
+                <tr>
+                    <td><i>"Court took <b>suo motu</b> cognizance"</i></td>
+                    <td><code>suo</code></td>
+                    <td><code>NN</code> (Noun) ❌</td>
+                    <td><code>RB</code> (Adverb) ✅</td>
+                    <td>Modifies judicial action adverbially ("on its own motion")</td>
+                </tr>
+                <tr>
+                    <td><i>"The <b>bench</b> dismissed appeal"</i></td>
+                    <td><code>bench</code></td>
+                    <td><code>NN</code> (Furniture/Seat) ❌</td>
+                    <td><code>NNP</code> (Judicial Panel) ✅</td>
+                    <td>Refers to Division Bench of High Court judges</td>
+                </tr>
+            </table>
+        </div>
+
+        <!-- SLIDE 16: Supervised ML POS Classifier -->
+        <div class="slide" data-speaker="Person 3: Domain NLP Innovations" data-notes="Beyond rules, I trained a Supervised Machine Learning POS Classifier using Logistic Regression. I extracted contextual n-gram features: prefixes, suffixes of length 2 to 4, capitalization flags, digit checks, and neighboring words. On a held-out legal test set, it reached 76.7% accuracy and a 0.705 F1-score! Highly effective.">
+            <div class="slide-tag">Module 2 · Machine Learning Classifier</div>
+            <div class="slide-title">Supervised Machine Learning POS Classifier</div>
+            <div class="slide-subtitle">Contextual feature engineering and held-out evaluation on Indian judicial sentences.</div>
+
+            <div class="grid-2">
+                <div class="card card-blue">
+                    <div class="card-title" style="color:#60A5FA;"><i class="fa-solid fa-microchip"></i> Feature Engineering Architecture</div>
+                    <div class="card-body">
+                        • <b>Character Suffixes:</b> <code>word[-2:]</code>, <code>word[-3:]</code>, <code>word[-4:]</code> (captures legal morphology like <i>-ing</i>, <i>-tion</i>, <i>-able</i>)<br/>
+                        • <b>Character Prefixes:</b> <code>word[:2]</code>, <code>word[:3]</code> (captures legal negation like <i>un-</i>, <i>non-</i>)<br/>
+                        • <b>Orthographic Flags:</b> <code>is_title</code>, <code>is_upper</code>, <code>has_digit</code><br/>
+                        • <b>Contextual Bigrams:</b> <code>prev_word</code>, <code>next_word</code> window
+                    </div>
+                </div>
+                <div class="card card-green">
+                    <div class="card-title" style="color:#34D399;"><i class="fa-solid fa-chart-line"></i> Held-Out Empirical Test Results</div>
+                    <div class="card-body">
+                        <div class="kpi-container" style="margin-top:0;">
+                            <div class="kpi-badge">
+                                <div class="kpi-val" style="color:#10B981;">76.7%</div>
+                                <div class="kpi-label">Test Accuracy</div>
+                            </div>
+                            <div class="kpi-badge">
+                                <div class="kpi-val" style="color:#60A5FA;">0.705</div>
+                                <div class="kpi-label">Weighted F1-Score</div>
+                            </div>
+                        </div>
+                        <div style="margin-top:12px; font-size:0.84rem;">
+                            • <b>Algorithm:</b> Multi-Class Logistic Regression with L2 regularization.<br/>
+                            • <b>Test Split:</b> 20% held-out annotated court sentences.<br/>
+                            • Successfully generalizes across judicial drafting styles.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 17: Named Entity Recognition in Case Law -->
+        <div class="slide" data-speaker="Person 3: Domain NLP Innovations" data-notes="I also implemented domain-specific Named Entity Recognition. Legal text requires knowing not just who the person is, but which Section was invoked and which Court ruled. Our NER pipeline extracts LEGAL_SECTION, LEGAL_STATUTE, LEGAL_COURT, and LEGAL_CITATION.">
+            <div class="slide-tag">Module 2 · Named Entity Extraction</div>
+            <div class="slide-title">Named Entity Recognition (NER) in Indian Case Law</div>
+            <div class="slide-subtitle">Extracting domain statutory entities alongside standard linguistic categories.</div>
+
+            <div class="grid-2">
+                <div class="card card-blue">
+                    <div class="card-title" style="color:#60A5FA;"><i class="fa-solid fa-tags"></i> Domain-Specific Legal Entities</div>
+                    <div class="card-body">
+                        • <code>LEGAL_SECTION</code>: <i>Section 438 CrPC</i>, <i>Section 302 IPC</i>, <i>s. 135 Customs</i><br/>
+                        • <code>LEGAL_STATUTE</code>: <i>Code of Criminal Procedure</i>, <i>NDPS Act</i>, <i>PMLA 2002</i><br/>
+                        • <code>LEGAL_COURT</code>: <i>Supreme Court of India</i>, <i>High Court of Allahabad</i><br/>
+                        • <code>LEGAL_CITATION</code>: <i>AIR 2020 SC 123</i>, <i>(2021) 4 SCC 302</i>
+                    </div>
+                </div>
+                <div class="card card-gold">
+                    <div class="card-title" style="color:#FBBF24;"><i class="fa-solid fa-user-group"></i> Standard Linguistic Entities</div>
+                    <div class="card-body">
+                        • <code>PERSON</code>: Accused, Petitioners, Respondents, Learned Judges<br/>
+                        • <code>ORG</code>: Enforcement Directorate (ED), Central Bureau of Investigation (CBI)<br/>
+                        • <code>MONEY</code>: Bail surety bonds, fine penalties (<i>₹50,000/-</i>)<br/>
+                        • <code>GPE</code>: State of U.P., State of Karnataka, UT of J&K
+                    </div>
+                </div>
+            </div>
+            <div class="callout-box callout-success" style="margin-top:14px;">
+                <b>Interactive Visualizer:</b> Built into our Streamlit GUI, allowing users to select any judgment (D01–D25) and filter entity tags dynamically with color-coded highlighting.
+            </div>
+        </div>
+
+        <!-- SLIDE 18: N-Gram Collocations & BPE Subwords -->
+        <div class="slide" data-speaker="Person 3: Domain NLP Innovations" data-notes="Finally, I extracted 1-to-5 grams and trained a Byte Pair Encoding model. The N-grams prove that legal text is dominated by formulaic multi-word phrases like 'code of criminal procedure' and 'anticipatory bail'. BPE with 6,000 subwords solves out-of-vocabulary terms like 'unconstitutional'. Person 4 will now present Pipeline B integration and evaluation.">
+            <div class="slide-tag">Module 2 · Lexical Analysis & Subwords</div>
+            <div class="slide-title">Statistical N-Grams & BPE Subword Tokenization</div>
+            <div class="slide-subtitle">Empirical evidence of legal collocations and handling out-of-vocabulary terminology.</div>
+
+            <div class="grid-2">
+                <div class="card card-blue">
+                    <div class="card-title" style="color:#60A5FA;"><i class="fa-solid fa-layer-group"></i> Higher-Order Legal N-Grams</div>
+                    <div class="card-body">
+                        • <b>Bigrams:</b> <code>high court</code> (1,842), <code>learned counsel</code> (1,650), <code>anticipatory bail</code> (432)<br/>
+                        • <b>Trigrams:</b> <code>learned counsel for</code> (1,210), <code>code of criminal</code> (480)<br/>
+                        • <b>4-Grams:</b> <code>code of criminal procedure</code> (245), <code>learned counsel for the</code> (389)<br/>
+                        • <b>5-Grams:</b> <code>under section of criminal procedure</code> (112)
+                    </div>
+                </div>
+                <div class="card card-green">
+                    <div class="card-title" style="color:#34D399;"><i class="fa-solid fa-puzzle-piece"></i> BPE Subword Segmentation (6,000 Vocab)</div>
+                    <div class="card-body">
+                        BPE breaks rare or hyphenated legal words into known subword units without defaulting to <code>&lt;UNK&gt;</code>:<br/><br/>
+                        • <code>unconstitutional</code> &rarr; <code>un + constitution + al</code><br/>
+                        • <code>non-bailable</code> &rarr; <code>non + - + bail + able</code><br/>
+                        • <code>misappropriation</code> &rarr; <code>mis + appropria + tion</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 19: Contextual Lemmatization -->
+        <div class="slide" data-speaker="Person 4: Pipeline B & IR Evaluation" data-notes="Thank you Person 3. I am Person 4. I integrated Pipeline B, built the dual-level index, the multi-mode IR engine, and conducted the benchmark evaluation. First, look at how contextual lemmatization resolves the Porter collision that Person 2 exposed. By using WordNet and spaCy with POS tags, 'execution' remains 'execution' (noun) and 'executive' remains 'executive'. 100% precision!">
+            <div class="slide-tag">Module 2 · Morphological Solution</div>
+            <div class="slide-title">Contextual POS-Aware Lemmatization: Resolving the Collision</div>
+            <div class="slide-subtitle">How Pipeline B achieves 100% precision on terms that caused Porter stemming to fail.</div>
+
+            <div class="grid-2">
+                <div class="card card-red">
+                    <div class="card-title" style="color:#F87171;"><i class="fa-solid fa-xmark"></i> Pipeline A: Porter Stemmer Failure</div>
+                    <div class="card-body">
+                        • <code>execution</code> (Decree) &rarr; <code>execut</code><br/>
+                        • <code>executive</code> (Magistrate) &rarr; <code>execut</code><br/><br/>
+                        <b>Query:</b> <code>"executive"</code><br/>
+                        • Retrieved: 13 Judgments<br/>
+                        • False Positives: 8 decree execution cases<br/>
+                        • <b>Precision: 38.5%</b>
+                    </div>
+                </div>
+                <div class="card card-green">
+                    <div class="card-title" style="color:#34D399;"><i class="fa-solid fa-check"></i> Pipeline B: POS Lemmatizer Success</div>
+                    <div class="card-body">
+                        • <code>execution</code> (Noun) &rarr; lemma: <code>execution</code><br/>
+                        • <code>executive</code> (Noun/Adj) &rarr; lemma: <code>executive</code><br/><br/>
+                        <b>Query:</b> <code>"executive"</code><br/>
+                        • Retrieved: 5 Judgments (D09, D14, D18, D20, D23)<br/>
+                        • False Positives: <b>Zero</b><br/>
+                        • <b>Precision: 100.0% 🏆</b>
+                    </div>
+                </div>
+            </div>
+            <div class="callout-box callout-success" style="margin-top:14px;">
+                <b>Linguistic Rationale:</b> WordNet and spaCy lemmatizers check grammatical dictionary lemmas based on part-of-speech context, ensuring that legal nouns and adjectives never lose their unique semantic identity.
+            </div>
+        </div>
+
+        <!-- SLIDE 20: Dual-Level Atomic Positional Indexing -->
+        <div class="slide" data-speaker="Person 4: Pipeline B & IR Evaluation" data-notes="I architected Pipeline B's dual-level index. Instead of only indexing single words, it indexes atomic compound keys like 'Section 302 IPC' and 'anticipatory bail' directly, while also keeping individual lemmas. That means searching for a statutory section is a direct O(1) hash lookup. It runs in 0.04 ms—3.5 times faster than Pipeline A!">
+            <div class="slide-tag">Module 3 · Inverted Index Innovation</div>
+            <div class="slide-title">Dual-Level Atomic Positional Indexing</div>
+            <div class="slide-subtitle">Sub-millisecond retrieval through dual-layer posting structures in Pipeline B.</div>
+
+            <div class="grid-2">
+                <div class="card card-green">
+                    <div class="card-title" style="color:#34D399;"><i class="fa-solid fa-layer-group"></i> Layer 1: Atomic Compound Postings</div>
+                    <div class="card-body">
+                        Indexes intact multi-word legal terms as single keys:<br/><br/>
+                        <code>'section 302 ipc': {<br/>
+                        &nbsp;&nbsp;'D11': [14, 82],<br/>
+                        &nbsp;&nbsp;'D12': [5],<br/>
+                        &nbsp;&nbsp;'D18': [23, 91]<br/>
+                        }</code><br/><br/>
+                        • Bypasses multi-word coordinate intersections.<br/>
+                        • Direct $O(1)$ hash lookup in memory!
+                    </div>
+                </div>
+                <div class="card card-blue">
+                    <div class="card-title" style="color:#60A5FA;"><i class="fa-solid fa-font"></i> Layer 2: Constituent Lemma Postings</div>
+                    <div class="card-body">
+                        Indexes individual lemmatized tokens with sentence and word offsets for general flexible search:<br/><br/>
+                        • Total Indexed Terms: <b>9,005 terms</b> (+650 compound legal entities over Pipeline A).<br/>
+                        • <b>Average Latency:</b> <span style="color:#10B981; font-weight:800; font-size:1.1rem;">0.04 ms</span> (vs. 0.14 ms in Pipeline A).<br/>
+                        • <b>Speedup Factor:</b> <b>3.5× Faster!</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 21: Pipeline B Architecture Diagram -->
+        <div class="slide" data-speaker="Person 4: Pipeline B & IR Evaluation" data-notes="Here is the complete architectural flowchart of Pipeline B that I assembled. It integrates domain cleaning, custom legal tokenization, protected stopwords, POS lemmatization, custom POS tagging, and dual-level indexing. Notice the green and gold badges showing why this is our winning model.">
+            <div class="slide-tag">Module 3 · Best Model Architecture</div>
+            <div class="slide-title">Pipeline B: Legal-Domain-Optimized Architecture (Best Model 🏆)</div>
+            <div class="slide-subtitle">Sequential data-flow of the winning domain-optimized architecture with optimization callouts.</div>
+
+            <div class="slide-img-container">
+                <img src="pipeline_b_flowchart.jpg" alt="Pipeline B Architecture Flowchart">
+            </div>
+        </div>
+
+        <!-- SLIDE 22: Advanced Multi-Mode IR Engine -->
+        <div class="slide" data-speaker="Person 4: Pipeline B & IR Evaluation" data-notes="I engineered the Information Retrieval engine supporting four distinct search modes: Keyword, Quoted Phrase, Boolean Logic using a Shunting-Yard parser supporting AND, OR, NOT, and Ranked Vector Space Retrieval using TF-IDF Cosine similarity.">
+            <div class="slide-tag">Module 4 · Information Retrieval Engine</div>
+            <div class="slide-title">Advanced Multi-Mode Legal Retrieval Engine</div>
+            <div class="slide-subtitle">Supporting Keyword, Exact Phrase, Boolean Algebra, and Ranked TF-IDF Cosine Retrieval.</div>
+
+            <div class="grid-2">
+                <div class="card card-blue">
+                    <div class="card-title" style="color:#60A5FA;"><i class="fa-solid fa-calculator"></i> Vector Space Ranked Retrieval (TF-IDF Cosine)</div>
+                    <div class="card-body">
+                        Calculates sublinear TF and inverse document frequency:<br/>
+                        $$\text{TF-IDF}(t, d) = (1 + \log \text{TF}_{t,d}) \times \log \left(\frac{N}{\text{DF}_t}\right)$$<br/>
+                        Scores documents using Cosine Similarity normalized against document length to eliminate bias towards long judgments.
+                    </div>
+                </div>
+                <div class="card card-gold">
+                    <div class="card-title" style="color:#FBBF24;"><i class="fa-solid fa-code-branch"></i> Boolean Shunting-Yard Expression Parser</div>
+                    <div class="card-body">
+                        Supports complex legal Boolean queries with operator precedence:<br/>
+                        • <b>Conjunctive:</b> <code>bail AND appeal</code> (Intersection)<br/>
+                        • <b>Disjunctive:</b> <code>cyber OR extortion</code> (Union)<br/>
+                        • <b>Relative Negation:</b> <code>bail AND NOT murder</code> (Difference)<br/>
+                        • <b>Quoted Phrases:</b> <code>"anticipatory bail" AND NOT murder</code>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SLIDE 23: Controlled Evaluation Across 15 Benchmark Queries -->
+        <div class="slide" data-speaker="Person 4: Pipeline B & IR Evaluation" data-notes="Here is the quantitative proof from our 15 benchmark queries. Pipeline B is the clear, undisputed winner. Mean Precision: 0.7721 vs 0.7089 (+8.9%). Mean F1-score: 0.7979 vs 0.7549 (+5.7%). Precision@5: 0.8111 vs 0.7444 (+9.0%). Latency: 0.04 ms (3.5x faster). Both retain full 0.8904 recall.">
+            <div class="slide-tag">Module 5 · Controlled Evaluation</div>
+            <div class="slide-title">Empirical Benchmark Evaluation (15 Legal Queries)</div>
+            <div class="slide-subtitle">Rigorous head-to-head comparison proving Pipeline B's decisive superiority.</div>
+
+            <table class="pres-table">
+                <tr>
+                    <th>Evaluation Measure</th>
+                    <th>Pipeline A (Baseline)</th>
+                    <th>Pipeline B (Legal Optimized)</th>
+                    <th>Empirical Margin</th>
+                    <th>Winning Model</th>
+                </tr>
+                <tr>
+                    <td><b>Mean Precision</b></td>
+                    <td>0.7089</td>
+                    <td><b>0.7721</b></td>
+                    <td><span style="color:#10B981; font-weight:700;">+8.9% Precision Boost</span></td>
+                    <td><b>Pipeline B 🏆</b></td>
+                </tr>
+                <tr>
+                    <td><b>Mean Recall</b></td>
+                    <td>0.8904</td>
+                    <td><b>0.8904</b></td>
+                    <td>100% Recall Retained</td>
+                    <td>Tie</td>
+                </tr>
+                <tr>
+                    <td><b>Mean F1-Score</b></td>
+                    <td>0.7549</td>
+                    <td><b>0.7979</b></td>
+                    <td><span style="color:#10B981; font-weight:700;">+5.7% Harmonic Gain</span></td>
+                    <td><b>Pipeline B 🏆</b></td>
+                </tr>
+                <tr>
+                    <td><b>Precision@5 (Top-Ranked)</b></td>
+                    <td>0.7444</td>
+                    <td><b>0.8111</b></td>
+                    <td><span style="color:#10B981; font-weight:700;">+9.0% Density Improvement</span></td>
+                    <td><b>Pipeline B 🏆</b></td>
+                </tr>
+                <tr>
+                    <td><b>Query Latency</b></td>
+                    <td>0.14 ms</td>
+                    <td><b>0.04 ms</b></td>
+                    <td><span style="color:#10B981; font-weight:700;">3.5× Faster Execution</span></td>
+                    <td><b>Pipeline B 🏆</b></td>
+                </tr>
+            </table>
+
+            <div class="slide-img-container" style="max-height:160px; margin-top:12px;">
+                <img src="chart_pipeline_metrics.png" alt="Pipeline Comparison Bar Chart">
+            </div>
+        </div>
+
+        <!-- SLIDE 24: Interactive Dashboard GUI & Live Demo -->
+        <div class="slide" data-speaker="Person 4: Pipeline B & IR Evaluation" data-notes="We built a complete 17-page Streamlit dashboard in a professional dark navy theme. Notice our special feature: on any query—like 'smuggl' or 'bail'—it displays live Precision, Recall, and F1-score metric cards along with the academic forensic execution trace right above the retrieved judgments. I will now open the live demo.">
+            <div class="slide-tag">Module 6 · GUI Implementation & Live Demo</div>
+            <div class="slide-title">Interactive Streamlit GUI & Live Evaluation Telemetry</div>
+            <div class="slide-subtitle">A modern dark navy legal-tech analytics dashboard with real-time IR metric calculation.</div>
+
+            <div class="grid-2">
+                <div class="card card-blue">
+                    <div class="card-title" style="color:#60A5FA;"><i class="fa-solid fa-desktop"></i> Dashboard Architecture (17 Views)</div>
+                    <div class="card-body">
+                        • <b>Corpus:</b> Dashboard Overview, Document Explorer, Corpus Statistics.<br/>
+                        • <b>NLP Analysis:</b> Tokenizer Workbench, Stopword Policy, Stem/Lemma Table, Custom POS & ML, Legal NER Visualizer, N-Grams, BPE Subwords.<br/>
+                        • <b>Information Retrieval:</b> Flagship Search, Positional Index Explorer, Boolean Builder, Pipeline A vs B Comparison, Retrieval Evaluation.
+                    </div>
+                </div>
+                <div class="card card-green">
+                    <div class="card-title" style="color:#34D399;"><i class="fa-solid fa-bolt"></i> Live Real-Time IR Evaluation Engine</div>
+                    <div class="card-body">
+                        • <b>Instant Metric Cards:</b> Precision, Recall, F1-Score, Precision@5, Latency dynamically calculated on ANY query.<br/>
+                        • <b>Forensic IR Execution Trace:</b> Academic monospace log showing Query terms, Postings verification, TP, FP, FN classification.<br/>
+                        • <b>Interactive Ground Truth Selector:</b> Allows professors to test custom relevance sets live!
+                    </div>
+                </div>
+            </div>
+            <div class="callout-box callout-success" style="margin-top:14px; text-align:center;">
+                <b>🚀 Ready for Live Demo:</b> We will now switch to <code>http://localhost:8501</code> to demonstrate live retrieval on <i>'smuggl'</i>, <i>'bail'</i>, and <i>'executive'</i>.
+            </div>
+        </div>
+
+        <!-- SLIDE 25: Conclusion & Viva Defense Punchline -->
+        <div class="slide" data-speaker="All Members: Conclusion" data-notes="In conclusion, our project proves that legal NLP requires domain preservation. Protecting statutory citations as atomic units, shielding negations, and using POS-aware lemmatization is not an optional tweak—it is essential. Pipeline B is verified as the best model. Thank you Ma'am, we are ready for questions!">
+            <div class="title-hero">
+                <div class="slide-tag">Final Synthesis · Viva Defense Summary</div>
+                <h1 style="font-size:2.1rem;">Conclusion & Final Defense Verdict</h1>
+                <div class="dept" style="font-size:0.96rem; max-width:800px; margin: 0 auto 20px auto; line-height:1.6;">
+                    "In legal informatics, text processing is inseparable from statutory reasoning. Generic NLP fails because citations fragment, liability inverts, and stems collide. <b>Pipeline B stands conclusively established as the Best Performing Pipeline</b>, achieving <b>0.7721 Precision</b>, <b>0.7979 F1-Score</b>, and <b>3.5× faster execution</b>."
+                </div>
+
+                <div class="grid-4" style="margin-top:20px;">
+                    <div class="card card-blue" style="padding:14px; text-align:center;">
+                        <div style="font-weight:700; color:#60A5FA;">Person 1</div>
+                        <div style="font-size:0.75rem; color:#94A3B8; margin-top:4px;">Ingestion & Baseline Tokenization</div>
+                    </div>
+                    <div class="card card-gold" style="padding:14px; text-align:center;">
+                        <div style="font-weight:700; color:#FBBF24;">Person 2</div>
+                        <div style="font-size:0.75rem; color:#94A3B8; margin-top:4px;">Pipeline A & Collision Analysis</div>
+                    </div>
+                    <div class="card card-green" style="padding:14px; text-align:center;">
+                        <div style="font-weight:700; color:#34D399;">Person 3</div>
+                        <div style="font-size:0.75rem; color:#94A3B8; margin-top:4px;">Custom Regex, ML POS & NER</div>
+                    </div>
+                    <div class="card card-green" style="padding:14px; text-align:center;">
+                        <div style="font-weight:700; color:#34D399;">Person 4</div>
+                        <div style="font-size:0.75rem; color:#94A3B8; margin-top:4px;">Pipeline B, Dual Index & IR Eval</div>
+                    </div>
+                </div>
+
+                <div style="margin-top:28px;">
+                    <span style="font-size:1.15rem; font-weight:700; color:#34D399;">Thank You, Ma'am! We welcome your questions.</span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Presenter Notes Overlay Box -->
+    <div class="notes-panel" id="notesPanel">
+        <div class="notes-header">
+            <span>🎤 Presenter Speaking Notes</span>
+            <span style="cursor:pointer;" onclick="toggleNotes()">✕</span>
+        </div>
+        <div id="notesContent"></div>
+    </div>
+
+    <!-- Bottom Navigation Controls -->
+    <div class="pres-footer">
+        <div class="controls-group">
+            <button class="btn-nav" onclick="prevSlide()"><i class="fa-solid fa-chevron-left"></i> Prev</button>
+            <div class="slide-counter" id="slideCounter">Slide 1 / 25</div>
+            <button class="btn-nav" onclick="nextSlide()">Next <i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+        <div class="controls-group">
+            <button class="btn-nav" onclick="toggleNotes()"><i class="fa-solid fa-note-sticky"></i> Notes (<kbd>N</kbd>)</button>
+            <button class="btn-nav" onclick="toggleFullScreen()"><i class="fa-solid fa-expand"></i> Fullscreen (<kbd>F</kbd>)</button>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+        const progressBar = document.getElementById('progressBar');
+        const slideCounter = document.getElementById('slideCounter');
+        const speakerBadge = document.getElementById('speakerBadge');
+        const notesPanel = document.getElementById('notesPanel');
+        const notesContent = document.getElementById('notesContent');
+
+        function updateSlide() {
+            slides.forEach((s, idx) => {
+                s.classList.toggle('active', idx === currentSlide);
+            });
+
+            // Update Progress Bar & Counter
+            const pct = ((currentSlide + 1) / totalSlides) * 100;
+            progressBar.style.width = pct + '%';
+            slideCounter.textContent = `Slide ${currentSlide + 1} / ${totalSlides}`;
+
+            // Update Speaker Badge
+            const activeSlide = slides[currentSlide];
+            const speaker = activeSlide.getAttribute('data-speaker') || 'Team Presentation';
+            speakerBadge.textContent = speaker;
+
+            // Update Presenter Notes
+            const notes = activeSlide.getAttribute('data-notes') || 'No additional speaker notes for this slide.';
+            notesContent.textContent = notes;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides - 1) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        function toggleNotes() {
+            notesPanel.classList.toggle('active');
+        }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen();
+            } else if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                prevSlide();
+            } else if (e.key.toLowerCase() === 'n') {
+                toggleNotes();
+            } else if (e.key.toLowerCase() === 'f') {
+                toggleFullScreen();
+            }
+        });
+
+        // Initialize
+        updateSlide();
+    </script>
+</body>
+</html>
