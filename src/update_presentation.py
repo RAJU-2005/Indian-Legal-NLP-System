@@ -667,65 +667,98 @@ html_content = """<!DOCTYPE html>
         </div>
 
         <!-- SLIDE 6: Morphological Stemming Experiments (Porter vs Snowball vs Lancaster) -->
-        <div class="slide" data-speaker="Brunda: Foundations & Ingestion" data-notes="For stemming in Pipeline A, why did we choose Porter over Lancaster? Lancaster is hyper-aggressive and cuts words destructively: legal becomes leg, custody becomes cust, and bailment becomes bail. But why Porter over Snowball? On our 257k legal tokens, Porter and Snowball produce 98.4% identical stems. More crucially, Snowball still suffers from the exact same semantic collisions: both collapse execution and executive to execut, and suit and suitable to suit! Porter was selected because it is the canonical IR benchmark standard in literature, proving that suffix stripping itself is fundamentally flawed for law. I now hand over to Shreerenu.">
+        <div class="slide" data-speaker="Brunda: Foundations & Ingestion" data-notes="For stemming in Pipeline A, examiners often ask two critical questions: First, why was Lancaster rejected? Look at the table on the left: Lancaster is hyper-aggressive and cuts words destructively: legal becomes leg, custody becomes cust, and bailment becomes bail, conflating civil contract law with criminal surety bail! Second, why did we pick Porter over Snowball? Across all 257k legal tokens in our corpus, Porter and Snowball produce 98.4% identical roots. More critically, Snowball fails on the exact same legal collisions: both collapse execution and executive to execut, and suit and suitable to suit! Porter was selected because it is the canonical IR benchmark standard in literature (Manning et al., 2008), scientifically proving that suffix stripping itself cannot handle legal semantics. I now hand over to Shreerenu.">
             <div class="slide-tag">Module 2 · Morphological Reduction</div>
             <div class="slide-title">Stemming Experiments: Porter vs. Snowball vs. Lancaster</div>
-            <div class="slide-subtitle">Why Porter over Lancaster? And why Porter over Snowball? Empirical justifications on legal text.</div>
+            <div class="slide-subtitle">Why was Lancaster rejected? And why did we select Porter over Snowball for baseline Pipeline A?</div>
 
-            <table class="pres-table">
-                <tr>
-                    <th>Legal Term</th>
-                    <th>Porter Stemmer</th>
-                    <th>Snowball Stemmer</th>
-                    <th>Lancaster Stemmer</th>
-                    <th>Linguistic & Legal Defect Analysis</th>
-                </tr>
-                <tr>
-                    <td><code>legal</code></td>
-                    <td><code>legal</code></td>
-                    <td><code>legal</code></td>
-                    <td><code>leg</code> ⚠️</td>
-                    <td>Lancaster destroys root; conflates jurisprudence with human leg!</td>
-                </tr>
-                <tr>
-                    <td><code>custody</code></td>
-                    <td><code>custodi</code></td>
-                    <td><code>custodi</code></td>
-                    <td><code>cust</code> ⚠️</td>
-                    <td>Lancaster chops root too short ('cust'), losing identity entirely</td>
-                </tr>
-                <tr>
-                    <td><code>bailment</code></td>
-                    <td><code>bailment</code></td>
-                    <td><code>bailment</code></td>
-                    <td><code>bail</code> ⚠️</td>
-                    <td>Lancaster conflates 'bailment' (contract) with criminal 'bail' (surety)!</td>
-                </tr>
-                <tr>
-                    <td><code>appellants</code></td>
-                    <td><code>appel</code></td>
-                    <td><code>appel</code></td>
-                    <td><code>appl</code> ⚠️</td>
-                    <td>Lancaster conflates court 'appellant' with 'apple' or 'apply'!</td>
-                </tr>
-                <tr>
-                    <td><code>preliminary</code></td>
-                    <td><code>preliminari</code></td>
-                    <td><code>preliminari</code></td>
-                    <td><code>prelimin</code> ⚠️</td>
-                    <td>Lancaster over-truncates statutory procedure terms</td>
-                </tr>
-                <tr>
-                    <td><code>execution</code> vs. <code>executive</code></td>
-                    <td><code>execut</code> / <code>execut</code> ⚠️</td>
-                    <td><code>execut</code> / <code>execut</code> ⚠️</td>
-                    <td><code>execut</code> / <code>execut</code> ⚠️</td>
-                    <td><b>Both Porter & Snowball fail!</b> Both collapse decree with magistrate</td>
-                </tr>
-            </table>
+            <div class="grid-2" style="align-items: start; gap: 20px;">
+                <!-- Left: Empirical Comparison Table -->
+                <div>
+                    <table class="pres-table" style="font-size:0.78rem;">
+                        <tr>
+                            <th>Legal Term</th>
+                            <th>Porter</th>
+                            <th>Snowball</th>
+                            <th>Lancaster</th>
+                            <th>Linguistic Defect Observed</th>
+                        </tr>
+                        <tr>
+                            <td><code>legal</code></td>
+                            <td><code>legal</code></td>
+                            <td><code>legal</code></td>
+                            <td><span style="color:#EF4444; font-weight:700;">leg ❌</span></td>
+                            <td>Conflates jurisprudence with human leg!</td>
+                        </tr>
+                        <tr>
+                            <td><code>custody</code></td>
+                            <td><code>custodi</code></td>
+                            <td><code>custodi</code></td>
+                            <td><span style="color:#EF4444; font-weight:700;">cust ❌</span></td>
+                            <td>Root truncated into unsearchable noise</td>
+                        </tr>
+                        <tr>
+                            <td><code>bailment</code></td>
+                            <td><code>bailment</code></td>
+                            <td><code>bailment</code></td>
+                            <td><span style="color:#EF4444; font-weight:700;">bail ❌</span></td>
+                            <td>Conflates contract law with criminal bail!</td>
+                        </tr>
+                        <tr>
+                            <td><code>appellant</code></td>
+                            <td><code>appel</code></td>
+                            <td><code>appel</code></td>
+                            <td><span style="color:#EF4444; font-weight:700;">appl ❌</span></td>
+                            <td>Conflates court petitioner with apple/apply</td>
+                        </tr>
+                        <tr>
+                            <td><code>preliminary</code></td>
+                            <td><code>preliminari</code></td>
+                            <td><code>preliminari</code></td>
+                            <td><span style="color:#EF4444; font-weight:700;">prelimin ❌</span></td>
+                            <td>Over-truncates statutory procedure terms</td>
+                        </tr>
+                        <tr>
+                            <td><code>execution</code> vs.<br/><code>executive</code></td>
+                            <td><span style="color:#FBBF24; font-weight:700;">execut ⚠️<br/>execut ⚠️</span></td>
+                            <td><span style="color:#FBBF24; font-weight:700;">execut ⚠️<br/>execut ⚠️</span></td>
+                            <td><span style="color:#EF4444; font-weight:700;">execut ❌<br/>execut ❌</span></td>
+                            <td><b>Both Porter & Snowball fail!</b><br/>Decree collapsed with Magistrate</td>
+                        </tr>
+                    </table>
 
-            <div class="callout-box callout-danger" style="margin-top:10px;">
-                <b>Why Porter Over Snowball?</b> On our 257k tokens, Porter and Snowball produce <b>98.4% identical roots</b>. Crucially, Snowball fails on the exact same legal collisions. Porter (1980) was selected for Pipeline A as the universal canonical IR baseline standard (Manning et al., 2008), establishing that algorithmic suffix stripping itself is inadequate, directly motivating Contextual POS Lemmatization in Pipeline B!
+                    <div class="kpi-container" style="margin-top:10px;">
+                        <div class="kpi-badge">
+                            <div class="kpi-val" style="color:#10B981;">98.4%</div>
+                            <div class="kpi-label">Porter-Snowball Identity</div>
+                        </div>
+                        <div class="kpi-badge">
+                            <div class="kpi-val" style="color:#EF4444;">0%</div>
+                            <div class="kpi-label">Semantic Disambiguation</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Two Rigorous Defense Cards -->
+                <div style="display:flex; flex-direction:column; gap:12px;">
+                    <div class="card card-red" style="padding:12px 16px;">
+                        <div class="card-title" style="color:#F87171; font-size:0.92rem;"><i class="fa-solid fa-xmark"></i> 1. Why Lancaster Was Rejected ❌</div>
+                        <div class="card-body" style="font-size:0.8rem; line-height:1.45;">
+                            • <b>Hyper-Aggressive Truncation:</b> Lancaster applies greedy, iterative suffix stripping that mutilates roots without semantic length bounds.<br/>
+                            • <b>Fatal Cross-Domain Conflation:</b> Stems <code>bailment</code> to <code>bail</code>, conflating civil contract bailment (Sec. 148 Contract Act) with criminal surety bail (Sec. 437/439 CrPC)!<br/>
+                            • <b>Verdict:</b> Completely unusable for legal retrieval due to massive false positive noise.
+                        </div>
+                    </div>
+
+                    <div class="card card-blue" style="padding:12px 16px;">
+                        <div class="card-title" style="color:#60A5FA; font-size:0.92rem;"><i class="fa-solid fa-scale-balanced"></i> 2. Why Porter Over Snowball for Baseline A? ⚖️</div>
+                        <div class="card-body" style="font-size:0.8rem; line-height:1.45;">
+                            • <b>Shared Suffix Blindness:</b> Snowball (Porter 2) fixes trailing '-e' and '-ly' in conversational English, but has <i>zero semantic awareness</i> of legal polysemes. It still collapses <code>execution</code> & <code>executive</code> into <code>execut</code>!<br/>
+                            • <b>98.4% Empirical Equivalence:</b> On our 257k legal tokens, Snowball yields virtually identical vocabulary roots as Porter.<br/>
+                            • <b>Canonical IR Benchmark Standard:</b> Porter (1980) is the universal baseline benchmark in NLP literature (Manning et al., 2008). Using Porter rigorously proves that <i>algorithmic suffix stripping itself is fundamentally flawed</i>, justifying Contextual POS Lemmatization in Pipeline B!
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 

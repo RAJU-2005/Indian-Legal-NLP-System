@@ -118,19 +118,20 @@ My finding: Conventional tokenizers treat punctuation within legal citations as 
 SLIDE 6: Stemming Experiments: Porter vs. Snowball vs. Lancaster
 --------------------------------------------------------------------------------
 [Brunda Speaks]:
-"For morphological stemming in baseline Pipeline A, we evaluated three major stemmers: Porter, Snowball (Porter 2), and Lancaster.
-
-Why not Lancaster?
-Lancaster uses hyper-aggressive, iterative replacement rules that mutilate legal morphology:
+"For morphological stemming in baseline Pipeline A, examiners frequently probe two critical questions:
+First: Why was Lancaster rejected?
+Look at the table on the left: Lancaster uses hyper-aggressive, iterative replacement rules that mutilate legal morphology:
   - 'legal' -> 'leg' (conflating the legal profession with an anatomical human leg!)
-  - 'custody' -> 'cust' (truncated into meaningless noise)
-  - 'bailment' -> 'bail' (conflating civil contracts of bailment under Indian Contract Act Section 148 with criminal surety bail!)
+  - 'custody' -> 'cust' (truncated into unsearchable noise)
+  - 'bailment' -> 'bail' (a fatal cross-domain error: conflating civil contract bailment under Section 148 of the Indian Contract Act with criminal surety bail under the CrPC!)
   - 'appellants' -> 'appl' (conflating court litigants with an apple or an application!)
+This causes severe false-positive pollution, making Lancaster completely unusable for legal retrieval.
 
-Why Porter over Snowball?
-  1. On our 257,849 legal tokens, Porter and Snowball produce 98.4% identical roots.
-  2. More critically: Snowball suffers from the exact same fatal semantic collisions as Porter. Both collapse 'execution' and 'executive' to 'execut', and both collapse 'suit' and 'suitable' to 'suit'!
-  3. Porter (1980) was chosen because it is the canonical, universally recognized baseline in IR benchmark literature (Manning et al., 2008). Using Porter provides a rigorous reference standard proving that algorithmic suffix stripping itself cannot handle legal polysemy.
+Second: Why did we pick Porter over Snowball?
+Snowball is often called 'Porter 2', so why not use Snowball?
+  1. Empirical Equivalence: Across all 257,849 tokens in our 25 judgments, Porter and Snowball produce 98.4% identical roots.
+  2. Shared Suffix Blindness: Snowball was designed to handle irregular modern conversational English (like trailing '-ly' and '-e' suffixes)—it has zero semantic awareness of domain polysemes. Consequently, Snowball still suffers from the exact same fatal collisions: both Porter and Snowball collapse 'execution' and 'executive' to 'execut', and both collapse 'suit' and 'suitable' to 'suit'!
+  3. Canonical Academic Standard: Porter (1980) is the universally recognized baseline in IR benchmark literature (Manning et al., 2008). Using Porter establishes an authoritative baseline that proves algorithmic suffix stripping itself is fundamentally flawed for law, directly motivating our shift to Contextual POS Lemmatization in Pipeline B!
 
 I now hand over to Shreerenu to present stopwords and Pipeline A."
 
